@@ -6,6 +6,7 @@ export interface SiteContent {
     email: string;
     phone?: string;
     headshotSrc: string;
+    logoImg: string;
     bioShort: string;
     socials: { label: "GitHub" | "LinkedIn" | "Email" | "X" | "Portfolio"; href: string }[];
     stats: { label: string; value: number; suffix?: string; prefix?: string }[];
@@ -83,6 +84,7 @@ export const siteContent: SiteContent = {
     email: "krishnakalakonda123@gmail.com",
     phone: "+1 (872) 314-4245",
     headshotSrc: "/krishna.png",
+    logoImg: "/favicon.svg",
     bioShort:
       "Data scientist and full-stack engineer bridging machine learning research with production software. I architect intelligent, explainable systems that turn raw signals into clear, observable outcomes for revenue, risk, and product teams.",
     socials: [

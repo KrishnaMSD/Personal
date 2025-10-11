@@ -43,8 +43,15 @@ export function Header({ onContactClick }: HeaderProps) {
     >
       <div className="container-grid flex h-[var(--header-height)] items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-3 text-base font-semibold text-foreground">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/15 text-accent">
-            KK
+          <span className="flex h-13 w-13 items-center justify-center rounded-full bg-white text-accent">
+            <img
+              src={siteContent.profile.logoImg}
+              alt={`${siteContent.profile.name} logo`}
+              className="h-12 w-12 rounded-full object-cover"
+              width={32}
+              height={32}
+              loading="eager"
+            />
           </span>
           <div className="flex flex-col leading-snug">
             <span>{siteContent.profile.name}</span>

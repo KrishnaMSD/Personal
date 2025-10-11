@@ -1,0 +1,19 @@
+Full Stack Data Scientist Radar Plot:
+(Use same score for the main plot as well)
+Programming: 95
+Artificial Intelligence: 90
+Frontend: 65
+Database: 90
+Data Visualization: 90
+Cloud: 50
+Dev Ops: 70
+Others: 60
+
+
+Creativity Tools:
+Score: 70
+Photoshop, Canva, Tinker CAD, Photography
+
+Others:
+Score: 65
+IoT, 3D Printing, Drone Technology

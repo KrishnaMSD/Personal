@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     "LLM Engineer",
     "Chicago Data Scientist",
   ],
+  icons: {
+    icon: "/favicon.svg",
+  },
   authors: [{ name: siteContent.profile.name, url: siteUrl }],
   openGraph: {
     title: `${siteContent.profile.name} | ${siteContent.profile.title}`,
