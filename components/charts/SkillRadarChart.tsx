@@ -13,18 +13,17 @@ interface SkillRadarChartProps {
 
 export function SkillRadarChart({ title, metrics }: SkillRadarChartProps) {
   const chartConfig = useMemo(() => {
-    const palette = ["#7C3AED", "#22D3EE", "#38BDF8", "#6366F1", "#0EA5E9", "#8B5CF6", "#14B8A6"];
-    const axisColorMap: Record<string, string> = {
-      Programming: palette[0],
-      "Artificial Intelligence": palette[3],
-      Frontend: palette[1],
-      Database: palette[5],
-      "Data Visualization": palette[2],
-      Cloud: palette[4],
-      "Dev Ops": palette[6],
-      Others: palette[0],
-    };
-    const colors = metrics.map((metric, index) => axisColorMap[metric.axis] ?? palette[index % palette.length]);
+  const palette = [
+  "#7C3AED", // vivid violet
+  "#0EA5E9", // sky blue
+  "#F97316", // bright orange (replaces teal for contrast)
+  "#F59E0B", // amber for warm contrast
+  "#6366F1", // indigo
+  "#10B981", // emerald green
+  "#EC4899", // pink-magenta accent
+  "#5ECDC0"  // mint-cyan
+];
+    const colors = metrics.map((_, index) => palette[index % palette.length]);
 
     const options: ApexOptions = {
       chart: {
