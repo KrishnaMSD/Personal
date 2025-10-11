@@ -82,6 +82,7 @@ export default function RootLayout({
       <body
         id="top"
         className={`${inter.variable} ${jetbrainsMono.variable} bg-background text-foreground antialiased`}
+        style={{ isolation: "isolate" }}
       >
         <a
           href="#main"

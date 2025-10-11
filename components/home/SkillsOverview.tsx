@@ -23,7 +23,7 @@ export function SkillsOverview() {
             ))}
           </div>
         </div>
-        <div className="mt-6 w-full max-w-xl lg:sticky lg:top-[calc(var(--header-height)+1.5rem)] lg:mt-0 lg:self-start">
+        <div className="mt-6 w-full max-w-lg lg:sticky lg:top-[calc(var(--header-height)+1.5rem)] lg:mt-0 lg:self-start">
           <SkillRadarChart title={polar.title} metrics={polar.metrics} />
         </div>
       </div>

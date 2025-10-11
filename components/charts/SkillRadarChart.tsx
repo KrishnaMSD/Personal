@@ -14,7 +14,17 @@ interface SkillRadarChartProps {
 export function SkillRadarChart({ title, metrics }: SkillRadarChartProps) {
   const chartConfig = useMemo(() => {
     const palette = ["#7C3AED", "#22D3EE", "#38BDF8", "#6366F1", "#0EA5E9", "#8B5CF6", "#14B8A6"];
-    const colors = metrics.map((_, index) => palette[index % palette.length]);
+    const axisColorMap: Record<string, string> = {
+      Programming: palette[0],
+      "Artificial Intelligence": palette[3],
+      Frontend: palette[1],
+      Database: palette[5],
+      "Data Visualization": palette[2],
+      Cloud: palette[4],
+      "Dev Ops": palette[6],
+      Others: palette[0],
+    };
+    const colors = metrics.map((metric, index) => axisColorMap[metric.axis] ?? palette[index % palette.length]);
 
     const options: ApexOptions = {
       chart: {
@@ -93,7 +103,7 @@ export function SkillRadarChart({ title, metrics }: SkillRadarChartProps) {
 
   return (
     <div
-      className="surface-card flex flex-col gap-5 p-6"
+      className="surface-card flex flex-col gap-4 p-5"
       role="img"
       aria-label={`${title} polar chart summarizing capability coverage`}
     >
@@ -101,7 +111,7 @@ export function SkillRadarChart({ title, metrics }: SkillRadarChartProps) {
         <h3 className="text-lg font-semibold text-foreground">{title}</h3>
         <p className="text-xs uppercase tracking-[0.28em] text-subtle">Skill coverage</p>
       </div>
-      <ApexChart type="polarArea" height={360} series={chartConfig.series} options={chartConfig.options} />
+      <ApexChart type="polarArea" height={320} series={chartConfig.series} options={chartConfig.options} />
     </div>
   );
 }
