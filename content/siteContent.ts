@@ -207,7 +207,7 @@ export const siteContent: SiteContent = {
     },
     {
       role: "Research Assistant",
-      org: "DePaul University — ADHD Lab",
+      org: "DePaul University",
       location: "Chicago, USA",
       start: "Mar 2025",
       end: "Present",
@@ -222,7 +222,7 @@ export const siteContent: SiteContent = {
     },
     {
       role: "Research Assistant",
-      org: "DePaul University — AI Innovation Lab",
+      org: "DePaul University",
       location: "Chicago, USA",
       start: "Apr 2025",
       end: "Present",
@@ -233,7 +233,7 @@ export const siteContent: SiteContent = {
         "Defined privacy guardrails and fallback flows for sensitive immigration use cases.",
         "Produced product briefs that connect market research insights to roadmap experiments.",
       ],
-      tags: ["LLMs", "Product Discovery", "Architecture", "Translation"],
+      tags: ["LLMs", "Product Discovery", "Architecture", "Chatbots", "TTS/STT", "Knowledge Graphs"],
     },
     {
       role: "Associate Data Scientist",
@@ -253,7 +253,7 @@ export const siteContent: SiteContent = {
         "Recognized as “Top Performer of the Month” for consistently delivering high-impact solutions.",
         "Expanded technical skills in startup environment by contributing in multiple domains, advancing to a full-stack data scientist role.",
       ],
-      tags: ["LLMs", "FastAPI", "AWS", "Mixpanel", "Product"],
+      tags: ["LLMs", "PSQL", "Full Stack", "MLOps", "AI/ML", "Python", "STT/TTS"],
     },
     {
       role: "Software Engineer Intern",
@@ -265,7 +265,6 @@ export const siteContent: SiteContent = {
         "Researched state-of-the-art conversational AI models and evaluated vendor APIs across latency, accuracy, and compliance.",
         "Curated and quality-controlled proprietary datasets that accelerated deployment readiness of production AI features.",
         "Documented cross-team ML operations playbooks adopted by engineering, product, and customer success teams.",
-        "Shipped internal tooling that connected Zoom SDK prototypes to analytics dashboards for experimentation.",
         "Presented iteration reviews that clarified risks, dependencies, and experiment outcomes for leadership.",
       ],
       tags: ["NLP", "Data Ops", "Documentation"],
