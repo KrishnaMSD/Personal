@@ -6,16 +6,19 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { projectEntries, projectIndex } from "@/content/siteContent";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 
+type ProjectPageParams = { slug: string };
+
 interface ProjectPageProps {
-  params: { slug: string };
+  params: Promise<ProjectPageParams>;
 }
 
 export function generateStaticParams() {
   return projectEntries.map((project) => ({ slug: project.slug }));
 }
 
-export function generateMetadata({ params }: ProjectPageProps): Metadata {
-  const project = projectIndex[params.slug];
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projectIndex[slug];
 
   if (!project) {
     return {
@@ -29,15 +32,16 @@ export function generateMetadata({ params }: ProjectPageProps): Metadata {
   };
 }
 
-export default function ProjectDetailPage({ params }: ProjectPageProps) {
-  const project = projectIndex[params.slug];
+export default async function ProjectDetailPage({ params }: ProjectPageProps) {
+  const { slug } = await params;
+  const project = projectIndex[slug];
 
   if (!project) {
     notFound();
   }
 
   const relevant = project.relevantSlugs
-    .map((slug) => projectIndex[slug])
+    .map((relatedSlug) => projectIndex[relatedSlug])
     .filter((item) => item && item.slug !== project.slug)
     .slice(0, 3);
 

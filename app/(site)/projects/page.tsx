@@ -20,7 +20,7 @@ const projectsStructuredData = {
     item: {
       "@type": "Project",
       name: project.title,
-      description: project.tagline ?? project.impact[0],
+      description: project.tagline ?? project.summary,
       startDate: project.timeframe ?? "",
       url: "https://krishnakalakonda.com/projects",
       creator: siteContent.profile.name,

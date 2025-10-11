@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Route } from "next";
 import { usePathname } from "next/navigation";
@@ -44,13 +45,13 @@ export function Header({ onContactClick }: HeaderProps) {
       <div className="container-grid flex h-[var(--header-height)] items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-3 text-base font-semibold text-foreground">
           <span className="flex h-13 w-13 items-center justify-center rounded-full bg-white text-accent">
-            <img
+            <Image
               src={siteContent.profile.logoImg}
               alt={`${siteContent.profile.name} logo`}
               className="h-12 w-12 rounded-full object-cover"
-              width={32}
-              height={32}
-              loading="eager"
+              width={48}
+              height={48}
+              priority
             />
           </span>
           <div className="flex flex-col leading-snug">

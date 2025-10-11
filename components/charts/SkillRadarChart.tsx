@@ -13,16 +13,16 @@ interface SkillRadarChartProps {
 
 export function SkillRadarChart({ title, metrics }: SkillRadarChartProps) {
   const chartConfig = useMemo(() => {
-  const palette = [
-  "#7C3AED", // vivid violet
-  "#0EA5E9", // sky blue
-  "#F97316", // bright orange (replaces teal for contrast)
-  "#F59E0B", // amber for warm contrast
-  "#6366F1", // indigo
-  "#10B981", // emerald green
-  "#EC4899", // pink-magenta accent
-  "#5ECDC0"  // mint-cyan
-];
+    const palette = [
+      "#7C3AED", // vivid violet
+      "#0EA5E9", // sky blue
+      "#F97316", // bright orange
+      "#F59E0B", // amber
+      "#6366F1", // indigo
+      "#10B981", // emerald
+      "#EC4899", // pink-magenta
+      "#5ECDC0", // mint-cyan
+    ];
     const colors = metrics.map((_, index) => palette[index % palette.length]);
 
     const options: ApexOptions = {
@@ -51,8 +51,7 @@ export function SkillRadarChart({ title, metrics }: SkillRadarChartProps) {
         },
         fontSize: "12px",
         markers: {
-          width: 12,
-          height: 12,
+          size: 12,
         },
         itemMargin: {
           horizontal: 10,
@@ -98,7 +97,7 @@ export function SkillRadarChart({ title, metrics }: SkillRadarChartProps) {
       series: metrics.map((metric) => metric.score),
       options,
     };
-  }, [metrics, title]);
+  }, [metrics]);
 
   return (
     <div
