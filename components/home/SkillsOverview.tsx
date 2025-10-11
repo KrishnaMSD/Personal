@@ -1,11 +1,10 @@
 import { siteContent } from "@/content/siteContent";
 
-import { SkillDonutChart } from "@/components/charts/SkillDonutChart";
-
+import { SkillRadarChart } from "@/components/charts/SkillRadarChart";
 import { SkillGroupCard } from "./SkillGroupCard";
 
 export function SkillsOverview() {
-  const { groups, donut } = siteContent.skills;
+  const { groups, polar } = siteContent.skills;
 
   return (
     <section id="skills" className="container-grid mt-16">
@@ -24,12 +23,8 @@ export function SkillsOverview() {
             ))}
           </div>
         </div>
-        <div className="mt-6 w-full max-w-md lg:sticky lg:top-[calc(var(--header-height)+1.5rem)] lg:mt-0 lg:self-start">
-          <SkillDonutChart
-            title="Full-Stack Data Scientist"
-            centerLabel={donut.centerLabel}
-            slices={donut.slices}
-          />
+        <div className="mt-6 w-full max-w-xl lg:sticky lg:top-[calc(var(--header-height)+1.5rem)] lg:mt-0 lg:self-start">
+          <SkillRadarChart title={polar.title} metrics={polar.metrics} />
         </div>
       </div>
     </section>

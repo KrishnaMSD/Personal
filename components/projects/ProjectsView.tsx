@@ -19,28 +19,61 @@ export function ProjectsView() {
   const [activeTags, setActiveTags] = useState<string[]>([]);
 
   const uniqueTags = useMemo(() => {
-    const tags = new Set<string>();
+    const counts = new Map<string, number>();
     siteContent.projects.forEach((group) => {
       group.items.forEach((project) => {
-        project.tech.forEach((tech) => tags.add(tech));
+        const combined = [...project.keywords, ...project.cardKeywords];
+        combined.forEach((tag) => {
+          counts.set(tag, (counts.get(tag) ?? 0) + 1);
+        });
       });
     });
-    return Array.from(tags).sort();
-  }, []);
+
+    const maxTags = 18;
+    const sorted = Array.from(counts.entries()).sort((a, b) => {
+      if (b[1] !== a[1]) return b[1] - a[1];
+      return a[0].localeCompare(b[0]);
+    });
+
+    const topTags = sorted.slice(0, maxTags).map(([tag]) => tag);
+    const ensureActive = activeTags.filter((tag) => counts.has(tag) && !topTags.includes(tag));
+
+    return [...topTags, ...ensureActive];
+  }, [activeTags]);
 
   const groups = useMemo<FilteredGroup[]>(() => {
     const queryLower = query.toLowerCase();
     return siteContent.projects
       .map((group) => {
         const filteredItems = group.items.filter((item) => {
-          const matchesQuery =
-            queryLower.length === 0 ||
-            item.title.toLowerCase().includes(queryLower) ||
-            (item.tagline?.toLowerCase().includes(queryLower) ?? false) ||
-            item.impact.some((bullet) => bullet.toLowerCase().includes(queryLower));
+          const searchableText = [
+            item.title,
+            item.tagline ?? "",
+            item.summary,
+            item.description,
+            ...item.achievements,
+            item.cardKeywords.join(" "),
+            item.keywords.join(" "),
+          ]
+            .join(" ")
+            .toLowerCase();
+
+          const matchesQuery = queryLower.length === 0 || searchableText.includes(queryLower);
+
+          const keywordBucket = item.keywords.map((keyword) => keyword.toLowerCase());
+          const cardBucket = item.cardKeywords.map((keyword) => keyword.toLowerCase());
+          const descriptionLower = item.description.toLowerCase();
 
           const matchesTags =
-            activeTags.length === 0 || activeTags.every((tag) => item.tech.includes(tag));
+            activeTags.length === 0 ||
+            activeTags.every((tag) => {
+              const lowered = tag.toLowerCase();
+              return (
+                keywordBucket.includes(lowered) ||
+                cardBucket.includes(lowered) ||
+                descriptionLower.includes(lowered)
+              );
+            });
 
           return matchesQuery && matchesTags;
         });
@@ -132,7 +165,8 @@ export function ProjectsView() {
                 <h2 className="text-lg font-semibold text-foreground">{group.group}</h2>
               </div>
               <p className="mt-2 max-w-2xl text-sm text-muted">
-                {group.items.length} projects in this focus area. Filtered shows {group.filteredItems.length}.
+                {group.description ?? `${group.items.length} projects in this focus area.`} Currently showing{" "}
+                {group.filteredItems.length} project{group.filteredItems.length === 1 ? "" : "s"} with the active filters.
               </p>
             </motion.div>
             <div className="grid gap-6 lg:grid-cols-2">

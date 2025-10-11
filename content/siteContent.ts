@@ -20,13 +20,15 @@ export interface SiteContent {
         | "Database"
         | "Cloud"
         | "Frontend"
-        | "DevOps";
+        | "DevOps"
+        | "Creativity Tools"
+        | "Others";
       level: number;
       tools: string[];
     }[];
-    donut: {
-      centerLabel: string;
-      slices: { label: string; value: number }[];
+    polar: {
+      title: string;
+      metrics: { axis: string; score: number }[];
     };
   };
   experience: {
@@ -52,18 +54,7 @@ export interface SiteContent {
     date?: string;
     bullets?: string[];
   }[];
-  projects: {
-    group: string;
-    items: {
-      title: string;
-      timeframe?: string;
-      tagline?: string;
-      impact: string[];
-      tech: string[];
-      links?: { label: "Live" | "GitHub" | "Article" | "Video"; href: string }[];
-      embed?: { type: "iframe" | "img" | "video"; src: string; alt?: string };
-    }[];
-  }[];
+  projects: ProjectGroup[];
   articles: {
     slug: string;
     title: string;
@@ -74,6 +65,28 @@ export interface SiteContent {
     body: string;
   }[];
   downloads: { label: "CV" | "Resume"; file: string; updated?: string; sizeKB?: number }[];
+}
+
+export interface ProjectGroup {
+  group: string;
+  description?: string;
+  items: ProjectItem[];
+}
+
+export interface ProjectItem {
+  slug: string;
+  title: string;
+  timeframe?: string;
+  tagline?: string;
+  summary: string;
+  achievements: string[];
+  description: string;
+  cardKeywords: string[];
+  keywords: string[];
+  website?: string;
+  links?: { label: "Live" | "GitHub" | "Article" | "Video"; href: string }[];
+  embed?: { type: "iframe" | "img" | "video"; src: string; alt?: string };
+  relevantSlugs: string[];
 }
 
 export const siteContent: SiteContent = {
@@ -88,7 +101,7 @@ export const siteContent: SiteContent = {
     bioShort:
       "Data scientist and full-stack engineer bridging machine learning research with production software. I architect intelligent, explainable systems that turn raw signals into clear, observable outcomes for revenue, risk, and product teams.",
     socials: [
-      { label: "GitHub", href: "https://github.com/KrishnaKalakonda" },
+      { label: "GitHub", href: "https://github.com/KrishnaMSD" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/krishna-kalakonda" },
       { label: "Email", href: "mailto:krishnakalakonda123@gmail.com" },
     ],
@@ -101,73 +114,78 @@ export const siteContent: SiteContent = {
     groups: [
       {
         name: "Programming",
-        level: 92,
+        level: 95,
         tools: [
           "Python",
-          "R",
+          "TypeScript",
           "JavaScript",
+          "R",
           "Java",
-          "C",
-          "Matlab",
           "FastAPI",
-          "Flask",
-          "Streamlit",
-          "React",
-          "LangChain",
+          "Node.js",
+          "Next.js",
+          "SQL",
         ],
       },
       {
         name: "Data Visualization",
-        level: 85,
-        tools: ["Tableau", "Matplotlib", "Plotly", "Power BI", "JupyterLab"],
+        level: 90,
+        tools: ["Tableau", "Plotly", "Matplotlib", "Power BI", "Seaborn"],
       },
       {
         name: "Machine Learning",
         level: 90,
         tools: [
-          "scikit-learn",
-          "TensorFlow",
-          "PyTorch",
-          "NLP",
+          "Interpretable ML",
           "LLMs",
-          "RAG",
-          "NER",
           "Time Series",
-          "Explainable AI",
           "Prompt Engineering",
+          "Feature Stores",
         ],
       },
       {
         name: "Database",
-        level: 82,
+        level: 90,
         tools: ["PostgreSQL", "MongoDB", "MySQL", "Snowflake"],
       },
       {
         name: "Cloud",
-        level: 80,
-        tools: ["AWS", "Docker", "Jenkins", "Kubeflow", "Git"],
+        level: 50,
+        tools: ["AWS", "Docker", "Jenkins", "CI/CD Pipelines"],
       },
       {
         name: "Frontend",
-        level: 76,
-        tools: ["React", "Next.js", "Tailwind CSS", "HTML", "CSS"],
+        level: 65,
+        tools: ["React", "Next.js", "Tailwind CSS", "Design Systems"],
       },
       {
         name: "DevOps",
-        level: 74,
-        tools: ["CI/CD", "Monitoring", "Mixpanel", "HubSpot", "Twilio"],
+        level: 70,
+        tools: ["Observability", "Mixpanel", "HubSpot", "Release Automation"],
+      },
+      {
+        name: "Creativity Tools",
+        level: 70,
+        tools: ["Photoshop", "Canva", "TinkerCAD", "Premiere Pro"],
+      },
+      {
+        name: "Others",
+        level: 60,
+        tools: ["IoT", "Drone Tech", "3D Printing", "Workshop Facilitation"],
       },
     ],
-    donut: {
-      centerLabel: "Full-Stack Data Scientist",
-      slices: [
-        { label: "Programming", value: 18 },
-        { label: "Machine Learning", value: 22 },
-        { label: "Data Visualization", value: 12 },
-        { label: "Database", value: 12 },
-        { label: "Cloud", value: 12 },
-        { label: "Frontend", value: 12 },
-        { label: "DevOps", value: 12 },
+    polar: {
+      title: "Full-Stack Data Scientist",
+      metrics: [
+        { axis: "Programming", score: 95 },
+        { axis: "Cloud", score: 50 },
+        { axis: "Artificial Intelligence", score: 90 },
+        { axis: "Others", score: 60 },
+        { axis: "Database", score: 90 },
+        { axis: "Frontend", score: 65 },
+        { axis: "Data Visualization", score: 90 },
+        { axis: "Dev Ops", score: 70 },
+        
       ],
     },
   },
@@ -179,9 +197,11 @@ export const siteContent: SiteContent = {
       start: "Feb 2025",
       end: "Present",
       bullets: [
-        "Built data pipelines that unify soil, yield, and weather measurements from Chicago partner farms into a research-grade repository.",
-        "Designed the domain schema and ingestion architecture that keeps preprocessing metadata synchronized across reactive dashboards.",
-        "Co-developed a React-based insight portal highlighting crop health, volunteer contributions, and funding outcomes for local farm leads.",
+        "Built a PostgreSQL-backed pipeline that unifies soil health, yield, and volunteer metrics from Chicago community farms.",
+        "Designed a React insight portal that spotlights crop health and grant readiness indicators for partner organizations.",
+        "Authored data contracts and ingestion workflows so researchers share consistent preprocessing metadata.",
+        "Automated anomaly checks that flag data quality risks before they reach analysis notebooks.",
+        "Facilitated cross-lab syncs that translate research hypotheses into analytics dashboards and narrative briefs.",
       ],
       tags: ["React", "PostgreSQL", "Data Engineering", "Visualization"],
     },
@@ -192,9 +212,11 @@ export const siteContent: SiteContent = {
       start: "Mar 2025",
       end: "Present",
       bullets: [
-        "Engineered interpretable ML models that surface gender-specific attention markers from multi-modal clinical assessments.",
-        "Balanced diagnostic accuracy with fairness constraints, lifting sensitivity for underrepresented populations by 14%.",
-        "Translated model outputs into clinician-friendly narratives and tooling that support individualized ADHD interventions.",
+        "Engineered interpretable ML models that surface gender-specific attention markers from clinical assessments.",
+        "Balanced diagnostic accuracy with fairness constraints, improving sensitivity for underrepresented cohorts by 14%.",
+        "Translated SHAP-style explanations into clinician-friendly narratives that support individualized interventions.",
+        "Ran collaborative review sessions with psychologists to align model outputs with qualitative observations.",
+        "Drafted an evaluation rubric that keeps future model iterations auditable and bias-aware.",
       ],
       tags: ["Explainable AI", "Statistics", "Python", "Healthcare"],
     },
@@ -205,9 +227,11 @@ export const siteContent: SiteContent = {
       start: "Apr 2025",
       end: "Present",
       bullets: [
-        "Led market landscaping for immigration-focused AI products, identifying 30+ pain points across legal aid NGOs.",
-        "Curated multilingual corpora and speech datasets to fine-tune LLM agents that orchestrate translation and triage tasks.",
-        "Architected a speech-to-decision assistant that chains ASR, translation, and policy recommendation services securely.",
+        "Mapped 30+ immigration journey pain points to scope AI assistant jobs-to-be-done.",
+        "Curated multilingual corpora and speech datasets to fine-tune LLM agents for translation and triage.",
+        "Architected a speech-to-decision workflow chaining ASR, translation, and policy recommendation services.",
+        "Defined privacy guardrails and fallback flows for sensitive immigration use cases.",
+        "Produced product briefs that connect market research insights to roadmap experiments.",
       ],
       tags: ["LLMs", "Product Discovery", "Architecture", "Translation"],
     },
@@ -219,9 +243,10 @@ export const siteContent: SiteContent = {
       end: "May 2024",
       bullets: [
         "Launched an objection handling copilot that classifies prospect objections at 95% accuracy and recommends rebuttals in real time.",
-        "Deployed a phone-verified contact engine that blended LLM call scripts, TTS, and CRM webhooks to lift outreach by 120%.",
+        "Deployed a phone-verified contact engine blending LLM call scripts, TTS, and CRM webhooks to lift outreach by 120%.",
         "Productized a generative email writer that boosted positive replies by 80% while reducing SDR composition time by 90%.",
-        "Championed architecture for an automated SDR agent covering research, sequencing, and meeting scheduling workflows.",
+        "Championed an automated SDR agent blueprint that orchestrates research, sequencing, and scheduling tasks end-to-end.",
+        "Mentored new hires, packaged playbooks, and monitored telemetry to keep AI sales tooling production-ready.",
       ],
       tags: ["LLMs", "FastAPI", "AWS", "Mixpanel", "Product"],
     },
@@ -234,7 +259,9 @@ export const siteContent: SiteContent = {
       bullets: [
         "Researched state-of-the-art conversational AI models and evaluated vendor APIs across latency, accuracy, and compliance.",
         "Curated and quality-controlled proprietary datasets that accelerated deployment readiness of production AI features.",
-        "Documented cross-team ML operations playbooks adopted by engineering, product, and customer success squads.",
+        "Documented cross-team ML operations playbooks adopted by engineering, product, and customer success teams.",
+        "Shipped internal tooling that connected Zoom SDK prototypes to analytics dashboards for experimentation.",
+        "Presented iteration reviews that clarified risks, dependencies, and experiment outcomes for leadership.",
       ],
       tags: ["NLP", "Data Ops", "Documentation"],
     },
@@ -264,24 +291,32 @@ export const siteContent: SiteContent = {
       end: "May 2018",
       gpa: "8.99 / 10",
     },
+    {
+      degree: "High School",
+      school: "Pudami School",
+      location: "Yacharam, Telangana, India",
+      start: "Jun 2010",
+      end: "May 2016",
+      gpa: "10 / 10",
+    },
   ],
   activities: [
     {
       section: "Workshops",
       title: "Drone Technology Intensive",
-      date: "2023",
+      date: "2017",
       bullets: ["Hands-on build of quadcopters, flight tuning, and mission planning workflows."],
     },
     {
       section: "Workshops",
       title: "3D Printing & CAD Bootcamp",
-      date: "2022",
+      date: "2017",
       bullets: ["Modeled and fabricated custom enclosures for IoT sensor deployments."],
     },
     {
       section: "Workshops",
       title: "Astrophysics Bootcamp",
-      date: "2021",
+      date: "2018",
       bullets: ["Simulated orbital dynamics and deep-sky observation pipelines."],
     },
     {
@@ -293,12 +328,12 @@ export const siteContent: SiteContent = {
     {
       section: "Awards",
       title: "University Table Tennis Champion",
-      date: "2020",
+      date: "2018",
     },
     {
       section: "Awards",
       title: "School Academic Rank #1",
-      date: "2014–2016",
+      date: "2012 — 2016",
     },
     {
       section: "Extracurricular",
@@ -316,6 +351,24 @@ export const siteContent: SiteContent = {
       bullets: ["Led community health camps and STEM mentoring for rural schools."],
     },
     {
+      section: "Extracurricular",
+      title: "School People Leader",
+      date: "2014 — 2015",
+      bullets: ["Represented student voice, orchestrated cultural festivals, and coordinated alumni outreach."],
+    },
+    {
+      section: "Extracurricular",
+      title: "Sports Captain",
+      date: "2012 — 2021",
+      bullets: ["Captained handball, football, and table tennis squads while mentoring junior athletes."],
+    },
+    {
+      section: "Extracurricular",
+      title: "Peer Mentor",
+      date: "2018 — 2021",
+      bullets: ["Guided juniors on career paths and emerging tech via seminars, workshops, and office hours."],
+    },
+    {
       section: "Hackathons",
       title: "Campus Innovation Sprint",
       bullets: ["Built IoT prototypes combining sensor networks with predictive maintenance dashboards."],
@@ -324,164 +377,427 @@ export const siteContent: SiteContent = {
   projects: [
     {
       group: "AI & LLM Agents",
+      description: "Systems that pair language models with productized workflows for revenue teams.",
       items: [
         {
+          slug: "ai-sales-agent",
           title: "AI Sales Agent",
-          timeframe: "2023",
-          tagline: "Automated SDR lifecycle with orchestrated LLM micro-services.",
-          impact: [
-            "Designed multi-agent architecture covering research, outreach, sequencing, and scheduling.",
-            "Integrated CRM, calendars, and telephony APIs with guardrails for compliance and analytics.",
-            "Reduced manual SDR touchpoints by 65% while preserving brand voice control.",
+          timeframe: "2024",
+          tagline: "Agentic SDR automation blueprint",
+          summary:
+            "Architected a multi-agent system that connects Outplay's lead research, sequencing, email, and scheduling modules into one autonomous SDR assistant.",
+          achievements: [
+            "Mapped end-to-end workflows so an AI agent can progress prospects from research to booked meetings.",
+            "Defined dual autopilot and co-pilot modes to balance automation with human approvals.",
           ],
-          tech: ["LLMs", "FastAPI", "LangChain", "AWS", "Twilio"],
+          description: [
+            "Sales Development Representatives (SDRs) spend considerable time on routine tasks: sourcing qualified leads, drafting personalized emails, scheduling follow-ups, and handling objections. While Outplay’s platform already provided standalone tools—Lead Generator, Sequence Generator, Magic Mail (email writer), Objection Handler, and calendar integration—these modules were siloed and required manual orchestration. The challenge was to create a unified system that could leverage these components to automatically mimic an SDR’s workflow, freeing them to focus on high-value activities.",
+            "",
+            "The AI Sales Agent initiative reimagined the sales process as a fully automated pipeline. SDRs would begin by choosing an agent profile—such as an agent specialized in engaging executives at start-up companies. The system would then use the Lead Generator to identify qualified prospects based on historical data and predefined criteria. Once a list of leads was generated, the Sequence Generator would craft a personalized outreach plan for each prospect, incorporating both timing and messaging across multiple channels (emails, calls, LinkedIn, etc.). Next, the Magic Mail component would generate the actual email content—both initial outreach and replies—while the Objection Handler would manage and respond to prospect objections with appropriate context.",
+            "",
+            "The final objective of the agent was to schedule a meeting. To achieve this, the agent continuously executed the sequence until a booking was secured, automatically sending follow-ups and updating the prospect’s status. Prospects were sorted into buckets such as follow-up executives, no response, not interested, or budget issues. Each bucket triggered a different agent workflow with customized sequences aimed at nudging the prospect toward a meeting. The architecture also defined two modes of operation: Autopilot, where the AI agent handled everything from lead sourcing to meeting booking without human intervention, and Co-pilot, where the agent executed each step but waited for SDR approval before proceeding. This dual-mode design ensured flexibility, allowing SDRs to maintain control or hand off the process entirely depending on their preferences.",
+            "",
+            "Although the full implementation was not completed before departing for graduate studies, the project delivered a comprehensive architectural blueprint that outlined data flows, module interactions, error handling, and scalability considerations. It laid the groundwork for a future where AI-driven agents could handle SDR tasks end-to-end, promising to dramatically increase efficiency and consistency in sales outreach while ensuring personalization and compliance with each company’s unique policies.",
+          ].join("\n"),
+          cardKeywords: ["Multi-agent AI", "Sales Automation", "Workflow Orchestration", "Architecture"],
+          keywords: [
+            "AI Automation",
+            "Multi-Agent Systems",
+            "Sales Enablement",
+            "Workflow Orchestration",
+            "Natural Language Processing",
+            "Architecture Design",
+            "Data Integration",
+          ],
+          website: "https://outplay.ai/SDR-agent",
+          relevantSlugs: ["sureconnect-phone-verified-leads", "magic-mail", "sequence-generator"],
         },
         {
+          slug: "sureconnect-phone-verified-leads",
+          title: "SureConnect",
+          timeframe: "2023 — 2024",
+          tagline: "LLM-powered phone verification",
+          summary:
+            "Built an AI calling agent that verifies lead contact data across telephony providers, keeping sales pipelines accurate and responsive.",
+          achievements: [
+            "Reduced verification costs 3× and accelerated processing 5× by refactoring call orchestration.",
+            "Lifted contact validation accuracy from 88% to 94% through error log analytics and architecture cleanup.",
+          ],
+          description: [
+            "In sales-driven organizations, time is critical. Sales Development Representatives (SDRs) spend significant time verifying lead contact details, but unreliable information leads to wasted calls, voicemails, or unanswered attempts. This inefficiency takes valuable time away from high-priority tasks, like engaging genuine prospects, and contributes to missed opportunities in the sales pipeline. The challenge was to create a scalable, cost-effective solution that allowed SDRs to focus more on closing deals and less on administrative work.",
+            "",
+            "SureConnect was developed to automate the phone verification process using AI-powered calling agents. The system aimed to streamline the validation of lead contact details through automated conversations, utilizing Text-to-Speech (TTS), Speech-to-Text (STT), and chatbot technologies. However, early deployment revealed several bottlenecks: the system was slow, error-prone, and costly due to its reliance on Twilio, hindering its scalability and performance.",
+            "",
+            "To resolve these issues, a review of alternative calling providers led to the adoption of Plivo and Telnyx, which were 60% cheaper than Twilio. Additionally, it was found that the TTS process consumed over 50% of system resources, with 95% of calls not needing the assistant to speak once the lead's name was identified. Based on these insights, the TTS module was removed for most calls, significantly improving system efficiency by reducing both time and resource consumption.",
+            "",
+            "The architecture was further optimized by modularizing the system, separating the caller API, TTS, transcription, chatbot, and AI helpers into individual components. This not only enhanced flexibility and scalability but also simplified maintenance. A new CallerManager module was introduced, seamlessly integrating multiple APIs (Twilio, Plivo, Telnyx), enabling easy switching between providers.",
+            "",
+            "In addition to backend improvements, I also led the development of the SureConnect website from start to finish. Developed using React, the website provided users with an intuitive interface to monitor calls, view results, and interact with the system, ensuring a seamless experience for both clients and internal users.",
+            "",
+            "These optimizations resulted in substantial improvements: call duration dropped from 45 seconds to 15 seconds, making the system 5 times faster and 3 times cheaper. Error rates decreased by 97%, while the accuracy of lead validation increased from 88% to 94%. These improvements not only reduced operational costs but also significantly boosted the efficiency of the lead verification process by 120%. For my contributions, I was recognized as the best employee of the month, showcasing how thoughtful design and continuous optimization can transform a system into a high-performing, cost-effective solution.",
+          ].join("\n"),
+          cardKeywords: ["LLM Calls", "Lead Quality", "Voice Automation", "Twilio"],
+          keywords: [
+            "Lead Verification",
+            "Speech-to-Text",
+            "Text-to-Speech",
+            "Twilio",
+            "Plivo",
+            "Telnyx",
+            "FastAPI",
+            "AWS",
+            "Error Analysis",
+            "System Architecture",
+          ],
+          website: "http://sureconnect.ai",
+          relevantSlugs: ["ai-sales-agent", "objection-handling-copilot", "sequence-generator"],
+        },
+        {
+          slug: "magic-mail",
           title: "Magic Mail",
           timeframe: "2023",
-          tagline: "LLM-generated outbound emails tuned to buyer personas.",
-          impact: [
-            "Captured product intel, objection data, and persona cues to auto-compose persuasive replies.",
-            "Delivered +80% lift in positive responses across 40 pilot customers.",
-            "Wove in adaptive tone controls and CRM analytics hooks for A/B experimentation.",
+          tagline: "Persona-tuned generative email copy",
+          summary:
+            "Shipped an LLM email composer that tailors tone, sequencing, and data cues for every SDR persona.",
+          achievements: [
+            "Captured product intel, objections, and personas to personalize outbound email content.",
+            "Boosted positive reply rates by 80% across 40 pilot customers.",
           ],
-          tech: ["LLMs", "Prompt Engineering", "Mixpanel", "React"],
+          description: [
+            "Sales Development Representatives (SDRs) spend a significant amount of time crafting personalized emails to engage with prospects. However, this process is both time-consuming and requires creativity, as many SDRs struggle to effectively incorporate key prospect details or tackle objections raised by prospects. This inefficiency often results in wasted time and missed opportunities. The need for a solution that could help SDRs quickly generate personalized, creative, and engaging emails became apparent.",
+            "",
+            "Magic Mail was developed to automate the email drafting process using generative AI. The solution aimed to write highly personalized emails that took into account the details of each prospect, helping SDRs save time while increasing the likelihood of a response. The system was also designed to craft responses to objections, enabling SDRs to address concerns and maintain the conversation flow without manually drafting each reply.",
+            "",
+            "To build the system, a comprehensive analysis was conducted on existing sales emails written by SDRs. This analysis provided insights into the most effective strategies, personalized lines, and common objections. Additionally, research was done to identify the best email structures for maximizing response rates. With these insights in hand, experiments were conducted using Large Language Models (LLMs) to generate emails with varying prompt structures to find the best approach for high-quality, engaging content.",
+            "",
+            "A diverse dataset of prospect details and email exchanges was then curated to fine-tune the AI model. The model was trained to generate personalized emails by considering each prospect's specific information, such as their industry, previous interactions, and unique needs. Similarly, a dataset of common objections and responses was used to train the system to generate effective replies that tackled prospects' concerns. The final model, fine-tuned and continuously improved, provided results that surpassed existing models, giving SDRs an effective tool to engage with prospects efficiently.",
+            "",
+            "Magic Mail successfully reduced the time spent by SDRs on drafting emails by 250% while also improving the email outreach by 80%. By automating the process of email creation and response handling, SDRs were able to focus on more strategic tasks, like relationship-building, and significantly improve their outreach efforts. The system continuously evolved, incorporating feedback and industry best practices to create a tool that adapted to changing needs and maximized effectiveness for sales teams.",
+          ].join("\n"),
+          cardKeywords: ["Generative Email", "Persona Tuning", "Outreach Automation", "Analytics"],
+          keywords: [
+            "Email Personalization",
+            "Prompt Engineering",
+            "Sales Enablement",
+            "Mixpanel Analytics",
+            "Knowledge Bases",
+            "Compliance Guardrails",
+          ],
+          website: "https://outplay.ai/ai-for-sales",
+          relevantSlugs: ["sequence-generator", "ai-sales-agent", "objection-handling-copilot"],
         },
         {
+          slug: "objection-handling-copilot",
           title: "Objection Handling Copilot",
-          timeframe: "2022 - 2023",
-          tagline: "Semantic objection detection with guided rebuttals.",
-          impact: [
-            "Trained NER and intent models to categorize sales objections at 95% accuracy.",
-            "Surfaced rebuttal playbooks contextualized by deal stage and persona.",
-            "Synthesized call transcripts into coaching loops for SDR enablement.",
+          timeframe: "2022 — 2023",
+          tagline: "Real-time rebuttals for sales objections",
+          summary:
+            "Delivered a copilot that classifies objections in sales conversations and surfaces context-aware rebuttals.",
+          achievements: [
+            "Trained intent and NER models that tag objections with 95% accuracy.",
+            "Linked rebuttal playbooks to deal stage, persona, and sentiment cues.",
           ],
-          tech: ["NLP", "NER", "LangChain", "FastAPI"],
+          description: [
+            "Sales Development Representatives (SDRs) face significant challenges in identifying objections like budget, timing, competitor, authority, and information in prospect emails. Manually reading through emails to pinpoint these objections can be time-consuming, leading to inefficiencies and delayed responses. The goal was to build a system that automatically detects objections, allowing SDRs to prioritize their time and engage with the most promising leads.",
+            "",
+            "The solution was built using Named Entity Recognition (NER), a powerful NLP technique to detect and categorize objections in emails. A diverse dataset of prospect emails was created, with each email labeled based on the type of objection it contained. Label Studio was used for efficient data annotation, ensuring that the emails were accurately labeled with the corresponding objections. Once the dataset was prepared, the SPACY framework was used to fine-tune a base model for objection detection. Multiple versions of the model were tested to optimize performance, and the best version was selected, achieving a 95% model accuracy.",
+            "",
+            "To improve the SDR workflow, an API was developed to integrate the objection-detection system with existing sales tools. This API allowed SDRs to easily filter emails based on the prospect’s interest or objections, enabling them to focus on high-priority emails. The system automatically categorized emails into interested, objections, and not interested buckets, allowing SDRs to prioritize responses efficiently and reduce time spent on unresponsive leads.",
+            "",
+            "The final solution enabled SDRs to automatically detect objections, significantly reducing the time spent manually reading and sorting emails. By streamlining the objection-handling process, the system helped SDRs respond faster, prioritize more effectively, and ultimately improve their productivity and sales performance.",
+          ].join("\n"),
+          cardKeywords: ["Objection Detection", "Real-time Coaching", "NLP", "Sales Enablement"],
+          keywords: [
+            "Objection Classification",
+            "NER",
+            "Sales Coaching",
+            "Enablement Playbooks",
+            "Conversation Intelligence",
+          ],
+          website: "https://outplay.ai/ai-for-sales",
+          relevantSlugs: ["magic-mail", "sequence-generator", "sureconnect-phone-verified-leads"],
         },
         {
+          slug: "sequence-generator",
           title: "Sequence Generator",
           timeframe: "2023",
-          tagline: "Dynamic multi-touch outreach sequences.",
-          impact: [
-            "Reduced sequence build time by 90% with persona-aware prompts and battle-card ingestion.",
-            "Orchestrated TTS, email, and social messaging cadences with analytics feedback.",
-            "Enabled SDRs to launch experiments via low-code knobs and real-time guardrails.",
+          tagline: "Adaptive multi-touch outreach",
+          summary:
+            "Created a generative engine that assembles personalized multi-channel outreach sequences in minutes instead of hours.",
+          achievements: [
+            "Cut sequence build time by 90% with persona-aware prompts and context ingestion.",
+            "Streamed each step to the UI as soon as it was ready so SDRs could review progressively.",
           ],
-          tech: ["Generative AI", "LangChain", "HubSpot", "Calendars"],
+          description: [
+            "Sales Development Representatives (SDRs) face a common challenge in creating personalized sales sequences. These sequences typically involve 6 to 10 steps and need to be tailored to various factors such as industry, company type, and prospect details. Creating these sequences manually takes a significant amount of time, often leading to the use of unpersonalized, generic sequences. This reduces engagement and effectiveness. The need was to automate and speed up the process, enabling SDRs to create personalized sequences quickly while still maintaining high quality.",
+            "",
+            "The Sequence Generator was designed to address these pain points by automating the creation of personalized sales sequences. Using inputs like product details, sales points, and prospect information, the system generates optimized sequences in just a few minutes, compared to the hours typically required for manual creation. Generative AI was used to design the sequence steps and generate content, making the sequence both effective and personalized for the prospect.",
+            "",
+            "A significant part of the development was focused on the API development and database architecture. The unstructured data related to sequences and prospects was stored in MongoDB, allowing flexible and scalable storage. The system also addressed a key user experience issue: AI-generated sequences took around 50 seconds to complete. To avoid keeping the user waiting, the system was enhanced to send each step's content as soon as it was ready, allowing the SDR to review and approve steps progressively rather than waiting for the entire sequence to finish.",
+            "",
+            "Another pain point identified was that AI-generated sequences could sometimes be near perfect, except for one step. If the entire sequence had to be regenerated due to one suboptimal step, it would be inefficient. To solve this, a feature was added to allow re-generation of individual steps, based on additional context provided by the SDR on what to improve. This made the process more logical, efficient, and reliable, saving time and preventing unnecessary rework.",
+            "",
+            "The Sequence Generator provided flexibility, speed, and precision, helping SDRs create high-quality, personalized sequences much faster. With the ability to experiment with different types of outreach (emails, calls, LinkedIn messages) and dynamically add or adjust steps, the tool significantly enhanced productivity and improved the overall efficiency of the sales outreach process.",
+          ].join("\n"),
+          cardKeywords: ["Sequence Automation", "Generative AI", "Multichannel Outreach", "Experimentation"],
+          keywords: [
+            "Outreach Automation",
+            "Generative AI",
+            "Persona Personalization",
+            "MongoDB",
+            "Real-time UX",
+            "Sales Operations",
+          ],
+          website: "https://outplay.ai/ai-sequence-generator",
+          relevantSlugs: ["magic-mail", "ai-sales-agent", "sureconnect-phone-verified-leads"],
         },
       ],
     },
     {
       group: "Data Science & ML",
+      description: "Research-driven analytics projects that balance interpretability with measurable outcomes.",
       items: [
         {
+          slug: "adhd-gender-prediction",
           title: "ADHD & Gender Prediction",
           timeframe: "2024",
-          tagline: "Interpretable models for neurodiversity insights.",
-          impact: [
-            "Engineered features from psychometric surveys, cognitive scores, and behavior logs.",
-            "Benchmarked logistic regression, kNN, and XGBoost with SHAP-driven explanations.",
-            "Frame fairness narratives for gender-specific symptom expression and clinician adoption.",
+          tagline: "Interpretable neurodiversity insights",
+          summary:
+            "Modeled ADHD diagnosis indicators with fairness-aware pipelines that keep clinicians in the loop.",
+          achievements: [
+            "Engineered features from psychometric surveys, cognitive scores, and behavioral logs.",
+            "Benchmarked logistic regression, kNN, and XGBoost with explainability overlays clinicians trust.",
           ],
-          tech: ["Python", "scikit-learn", "XGBoost", "SHAP"],
+          description: [
+            "Clinicians needed gender-aware ADHD insights that remained transparent and defensible while still delivering strong predictive performance. The project focused on building a pipeline that could surface attention markers by gender without sacrificing interpretability.",
+            "",
+            "I engineered features from psychometric surveys, cognitive assessments, and behavioral logs, then experimented with models ranging from logistic regression to XGBoost. Each iteration paired accuracy benchmarks with fairness audits so cohort-level sensitivity stayed balanced. SHAP-style explanations were translated into clinician-friendly narratives, ensuring results could be discussed in the context of real patient experiences.",
+            "",
+            "The resulting workflow achieved a 0.82 F1 score while raising sensitivity for underrepresented gender cohorts by 14%. Comprehensive documentation, evaluation rubrics, and bias reviews created a repeatable path for future IRB approvals and kept clinical partners confident in how the model evolved.",
+          ].join("\n"),
+          cardKeywords: ["Clinical Analytics", "Fairness", "Interpretable ML", "Python"],
+          keywords: [
+            "Healthcare AI",
+            "Feature Engineering",
+            "Fairness Audits",
+            "Explainability",
+            "Logistic Regression",
+            "XGBoost",
+            "Gender Insights",
+          ],
+          relevantSlugs: ["gesture-prediction", "data-viz-pro", "galaxy-type-classification"],
         },
         {
+          slug: "gesture-prediction",
           title: "Gesture Prediction",
           timeframe: "2023",
-          tagline: "sEMG time-series classification for assistive wearables.",
-          impact: [
+          tagline: "sEMG-driven assistive models",
+          summary:
+            "Classified muscle signals using ensemble models to power responsive assistive wearables.",
+          achievements: [
             "Processed raw biosignals with frequency-domain filtering and window engineering.",
-            "Trained ensemble models achieving 82% multi-class accuracy (XGBoost) with low-latency inference.",
-            "Delivered confusion matrix dashboards to guide hardware refinement.",
+            "Benchmarked ensemble models, landing on XGBoost with 82.6% accuracy.",
           ],
-          tech: ["Python", "scikit-learn", "Signal Processing", "MLOps"],
+          description: [
+            "Gesture recognition wearables require reliable multi-class predictions from noisy surface EMG signals. The project set out to translate raw muscle activation data into real-time intent classifications that could support assistive devices.",
+            "",
+            "I engineered spectral and temporal features, built a preprocessing pipeline to denoise signals, and compared classical ensemble methods under identical conditions. XGBoost emerged as the best-performing model, and I wrapped the evaluation workflow in dashboards that highlighted confusion matrices, latency metrics, and hardware calibration guidance.",
+            "",
+            "The final models delivered 82.6% multi-class accuracy with low-latency inference, plus a ~90% success rate on rest-versus-activity detection. These insights informed future neuroprosthetics experiments and provided reproducible notebooks for continued iteration.",
+          ].join("\n"),
+          cardKeywords: ["sEMG Signals", "Time-Series ML", "Assistive Tech", "Edge Readiness"],
+          keywords: [
+            "Signal Processing",
+            "Feature Engineering",
+            "XGBoost",
+            "Time-Series Classification",
+            "Assistive Technology",
+          ],
+          relevantSlugs: ["adhd-gender-prediction", "iot-sensing-projects", "galaxy-type-classification"],
         },
         {
+          slug: "galaxy-type-classification",
           title: "Galaxy Type Classification",
           timeframe: "2022",
-          tagline: "CNN-assisted astrophotography labeling.",
-          impact: [
-            "Built transfer learning pipeline with augmentation for Sloan Digital Sky Survey images.",
-            "Achieved 88.7% macro accuracy while maintaining interpretability heatmaps.",
-            "Packaged results into interactive visualization for astronomy club outreach.",
+          tagline: "Transfer learning for astronomy",
+          summary:
+            "Adapted convolutional networks to classify Sloan Digital Sky Survey images with explainability overlays.",
+          achievements: [
+            "Fine-tuned pretrained CNNs with augmentation to reach 88.7% macro accuracy.",
+            "Generated saliency maps so club members could trust predictions.",
           ],
-          tech: ["TensorFlow", "Keras", "Python", "Visualization"],
+          description: [
+            "Amateur astronomers wanted a lightweight tool to categorize Sloan Digital Sky Survey imagery without building models from scratch. The project focused on adapting convolutional neural networks so club members could explore galaxies with confidence.",
+            "",
+            "I fine-tuned pretrained CNNs with aggressive augmentation to account for limited labeled data, then layered Grad-CAM saliency maps to visualize which features drove each prediction. The insights were packaged into an interactive dashboard for club workshops and outreach events.",
+            "",
+            "The final model achieved 88.7% macro accuracy on holdout images, improved astronomy club engagement, and produced a reusable dataset plus notebooks for future astrophotography experiments.",
+          ].join("\n"),
+          cardKeywords: ["Astrophysics", "Transfer Learning", "CNN", "Visualization"],
+          keywords: [
+            "Astrophotography",
+            "Convolutional Networks",
+            "Grad-CAM",
+            "Data Augmentation",
+            "STEM Outreach",
+          ],
+          relevantSlugs: ["adhd-gender-prediction", "gesture-prediction", "phishing-website-detection"],
         },
         {
+          slug: "phishing-website-detection",
           title: "Phishing Website Detection",
           timeframe: "2021",
-          tagline: "Hybrid ML + rule engine for web security.",
-          impact: [
-            "Shipped Flask dashboard exposing model scores and explainability toggles.",
-            "Earned 97% accuracy on benchmark dataset with gradient boosted trees.",
-            "Documented integration guidelines for corporate SOC adoption.",
+          tagline: "URL intelligence for cybersecurity",
+          summary:
+            "Merged disparate phishing datasets and built machine learning models for real-time URL classification.",
+          achievements: [
+            "Engineered 30+ URL-based features by synthesizing two public datasets.",
+            "Trained Random Forest and KNN models achieving 97% and 92% accuracy respectively.",
           ],
-          tech: ["Flask", "scikit-learn", "Python", "UI/UX"],
+          description: [
+            "Phishing attacks remain a pervasive security threat, exploiting unwary users by mimicking legitimate websites to steal sensitive information. This academic project set out to build a machine learning model that could classify phishing sites based solely on URL-derived features, reducing reliance on manual rules or user training.",
+            "",
+            "Two public phishing datasets were combined by manually extracting missing attributes with URL heuristics and DNS lookups. After preprocessing and encoding, multiple algorithms were evaluated—Random Forest, Decision Tree, XGBoost, and KNN—to identify the most reliable classifier. Random Forest delivered the strongest performance at 97% accuracy, with KNN close behind at 92%.",
+            "",
+            "To make the model usable, I wrapped it in a Flask web app where users could enter URLs and receive instant legitimacy predictions. The tool demonstrated how ensemble learning and thoughtful feature engineering could be packaged into an accessible cybersecurity assistant.",
+          ].join("\n"),
+          cardKeywords: ["Cybersecurity", "Random Forest", "URL Features", "Flask App"],
+          keywords: [
+            "Cybersecurity",
+            "Random Forest",
+            "Feature Engineering",
+            "Flask",
+            "Web Application",
+            "Threat Detection",
+          ],
+          relevantSlugs: ["data-viz-pro", "gesture-prediction", "galaxy-type-classification"],
         },
       ],
     },
     {
       group: "Web Apps & Dashboards",
+      description: "Interactive products that surface insights for business and academic partners.",
       items: [
         {
-          title: "Data Wiz Pro",
-          timeframe: "2024",
-          tagline: "Self-serve experimentation studio for ML teams.",
-          impact: [
-            "Delivered Streamlit workflows to compare preprocessing recipes and export winning models.",
-            "Automated experiment tracking with lineage metadata and reproducible notebooks.",
-            "Enabled cross-team sharing with access controls and audit trails.",
+          slug: "data-viz-pro",
+          title: "Data Viz Pro",
+          timeframe: "2025",
+          tagline: "No-code analytics studio",
+          summary:
+            "Built a Streamlit platform that guides beginners from raw datasets to trained models with side-by-side insight panels.",
+          achievements: [
+            "Launched a guided workflow covering upload, cleaning, visualization, modeling, and export.",
+            "Implemented dual-panel previews so users see how preprocessing changes affect plots and tables.",
           ],
-          tech: ["Streamlit", "Python", "MLflow", "Docker"],
+          description: [
+            "For many aspiring data scientists, diving into analysis can be overwhelming. Typical workflows demand scripting, cleaning, visualizing, and modeling—often without a clear sense of how each preprocessing step reshapes the data. Data Viz Pro was created as a no-code Streamlit studio that demystifies this journey.",
+            "",
+            "The app walks users through uploading CSV or Excel files, profiling datasets, and generating plots with Pandas, NumPy, Matplotlib, and Seaborn under the hood. Its signature experience is a side-by-side panel where the original dataset sits opposite the transformed view, so every dropped column, data type conversion, or imputed value is immediately reflected.",
+            "",
+            "When users advance to modeling, they can train scikit-learn algorithms, review train/test metrics, and download both the cleaned dataset and model artifacts. The result is an approachable yet rigorous playground that empowers classrooms and newcomers to experiment with end-to-end workflows in minutes.",
+          ].join("\n"),
+          cardKeywords: ["No-Code Analytics", "Streamlit", "Model Ops", "Data Education"],
+          keywords: [
+            "Streamlit",
+            "Data Visualization",
+            "Educational Tools",
+            "Model Evaluation",
+            "Interactive Dashboards",
+          ],
+          relevantSlugs: ["conversation-intelligence", "adhd-gender-prediction", "phishing-website-detection"],
         },
         {
+          slug: "conversation-intelligence",
           title: "Conversation Intelligence",
           timeframe: "2023",
-          tagline: "Call analytics with speaker diarization and coaching signals.",
-          impact: [
-            "Achieved 100% speaker recognition accuracy on benchmarked sales calls.",
-            "Parsed transcripts for intent, NER, and sentiment to fuel actionable coaching cues.",
-            "Integrated dashboards with near-real-time ingestion and alerting.",
+          tagline: "Sales call analytics",
+          summary:
+            "Engineered an AI-powered analysis suite that scores sales calls, pinpoints objections, and surfaces next steps.",
+          achievements: [
+            "Achieved 100% speaker identification accuracy using SpeechBrain embeddings.",
+            "Built a call scoring model spanning tone, action items, and objection handling metrics.",
           ],
-          tech: ["PyTorch", "AWS", "React", "WebSockets"],
+          description: [
+            "Sales organizations struggle to manually review every call and coach SDRs on follow-up execution. Conversation Intelligence tackled this by automating transcription, speaker identification, tone analysis, next-step extraction, objection detection, and call scoring.",
+            "",
+            "Kafka queued post-call tasks, after which backend services generated transcripts, diarized speakers, and fed generative and rule-based pipelines to surface action items. SpeechBrain embeddings unlocked 100% speaker recognition, while objection detection models highlighted common friction points.",
+            "",
+            "The system culminated in dashboards that put call scores, module-specific metrics, and coaching cues in front of managers. By packaging detailed analytics into an accessible view, SDRs received faster feedback and operations teams gained the data needed to prioritize training.",
+          ].join("\n"),
+          cardKeywords: ["Call Analytics", "SpeechBrain", "Insight Dashboards", "Sales Coaching"],
+          keywords: [
+            "Speech Recognition",
+            "Speaker Identification",
+            "Call Scoring",
+            "NLP",
+            "Sales Enablement",
+            "WebSockets",
+          ],
+          website: "https://outplay.ai/features/conversation-intelligence-software",
+          relevantSlugs: ["sureconnect-phone-verified-leads", "magic-mail", "ai-sales-agent"],
         },
         {
+          slug: "zoom-meeting-assistant",
           title: "Zoom Meeting Assistant",
           timeframe: "2022",
-          tagline: "Real-time meeting recorder and live stream orchestrator.",
-          impact: [
-            "Prototyped WebSockets pipeline capturing Zoom feeds and streaming highlights.",
-            "Added auto transcription and action item detection for post-call memos.",
-            "Enabled secure recording archival with role-based viewing permissions.",
+          tagline: "Real-time meeting capture proof-of-concept",
+          summary:
+            "Researched and prototyped automation that records Zoom calls and streams highlights without manual effort.",
+          achievements: [
+            "Evaluated Zoom SDK pathways to automate recording and live streaming reliably.",
+            "Developed bots that join meetings, capture audio/video, and push via WebSockets for live analytics.",
           ],
-          tech: ["React", "Python", "Zoom SDK", "WebSockets"],
+          description: [
+            "Sales teams needed a reliable way to capture Zoom meetings and stream them into analytics tools without manual effort. This proof of concept explored how far automation could go within Zoom’s SDK ecosystem.",
+            "",
+            "I researched Web and Meeting SDK capabilities, prototyped bots that auto-joined sessions, started recordings, and streamed audio/video via WebSockets for live analysis. Alongside technical experiments, I evaluated competing products and identified a partner that met requirements at a lower operational cost.",
+            "",
+            "The outcome validated automation feasibility, provided leadership with a pragmatic build-vs-buy recommendation, and fed critical learnings into subsequent Conversation Intelligence initiatives.",
+          ].join("\n"),
+          cardKeywords: ["Zoom SDK", "Real-time Streaming", "Automation", "Prototype"],
+          keywords: [
+            "Zoom SDK",
+            "Real-time Streaming",
+            "API Integration",
+            "WebSockets",
+            "Product Discovery",
+          ],
+          relevantSlugs: ["conversation-intelligence", "sureconnect-phone-verified-leads", "sequence-generator"],
         },
       ],
     },
     {
       group: "IoT & Experiments",
+      description: "Experimentation across hardware, edge analytics, and sensor-driven storytelling.",
       items: [
         {
-          title: "Phone Verified Leads",
-          timeframe: "2023",
-          tagline: "Speech-to-action lead qualification platform.",
-          impact: [
-            "Combined LLM-generated call flows with TTS/STT stacks across Twilio, Plivo, and Telnyx.",
-            "Orchestrated verification pipeline that boosted qualified outreach by 120%.",
-            "Linked analytics to Mixpanel and HubSpot for closed-loop success measurement.",
-          ],
-          tech: ["LLMs", "Twilio", "React", "FastAPI", "Mixpanel"],
-        },
-        {
+          slug: "iot-sensing-projects",
           title: "IoT Sensing Projects",
-          timeframe: "2019 - 2021",
-          tagline: "Rapid prototyping across sensors, microcontrollers, and edge analytics.",
-          impact: [
+          timeframe: "2019 — 2021",
+          tagline: "Sensor-driven insights for campus infrastructure",
+          summary:
+            "Delivered a suite of IoT prototypes that monitor environments, detect anomalies, and train peers on hardware best practices.",
+          achievements: [
             "Built environmental monitors with Arduino and ESP32 nodes reporting to cloud dashboards.",
-            "Deployed anomaly detection for predictive maintenance in campus facilities.",
-            "Mentored peer teams on electronics assembly, PCB design, and data logging best practices.",
+            "Developed predictive maintenance alerts that flag anomalies before downtime.",
           ],
-          tech: ["Arduino", "Edge ML", "Grafana", "MQTT"],
+          description: [
+            "Campus operations teams needed affordable ways to monitor environmental conditions across labs and dorms. I led a series of IoT prototypes that combined Arduino and ESP32 hardware with cloud dashboards to surface real-time insights.",
+            "",
+            "We instrumented sensors for temperature, humidity, and vibration, implemented lightweight edge analytics to flag anomalies, and built dashboards so staff could triage maintenance issues before they escalated. Documentation and workshops helped student teams replicate and extend each build.",
+            "",
+            "The initiative reduced downtime risk, equipped facilities staff with actionable telemetry, and inspired iterative student-led projects that reused the modular architecture.",
+          ].join("\n"),
+          cardKeywords: ["Edge Monitoring", "ESP32", "Predictive Maintenance", "IoT Coaching"],
+          keywords: [
+            "Arduino",
+            "Edge Analytics",
+            "Sensor Networks",
+            "Data Dashboards",
+            "Predictive Maintenance",
+            "Student Mentorship",
+          ],
+          relevantSlugs: ["gesture-prediction", "data-viz-pro", "zoom-meeting-assistant"],
         },
       ],
     },
@@ -623,3 +939,18 @@ Farms now send a single shareable link during board reviews—no more CSV export
 };
 
 export type SkillsGroupName = (typeof siteContent.skills.groups)[number]["name"];
+
+export interface ProjectWithGroup extends ProjectItem {
+  group: string;
+}
+
+export const projectEntries: ProjectWithGroup[] = siteContent.projects.flatMap((group) =>
+  group.items.map((item) => ({
+    ...item,
+    group: group.group,
+  }))
+);
+
+export const projectIndex: Record<string, ProjectWithGroup> = Object.fromEntries(
+  projectEntries.map((item) => [item.slug, item])
+);

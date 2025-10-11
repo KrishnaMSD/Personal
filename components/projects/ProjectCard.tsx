@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { KeyboardEvent, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Github, Globe, MonitorPlay } from "lucide-react";
 
-import { siteContent } from "@/content/siteContent";
+import type { ProjectItem } from "@/content/siteContent";
 
 const linkIcons = {
   Live: Globe,
@@ -13,8 +14,6 @@ const linkIcons = {
   Article: ExternalLink,
   Video: MonitorPlay,
 };
-
-type ProjectItem = (typeof siteContent.projects)[number]["items"][number];
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -24,8 +23,19 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(cardRef, { once: true, amount: 0.3 });
   const [embedVisible, setEmbedVisible] = useState(false);
+  const router = useRouter();
 
   const showEmbed = () => setEmbedVisible(true);
+  const handleNavigate = () => {
+    router.push(`/projects/${project.slug}`);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleNavigate();
+    }
+  };
 
   return (
     <motion.article
@@ -33,7 +43,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
       initial={{ opacity: 0, y: 32 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className="surface-card flex flex-col gap-5 rounded-3xl border border-white/5 p-6"
+      className="surface-card group flex cursor-pointer flex-col gap-5 rounded-3xl border border-white/5 p-6 transition hover:border-accent/40"
+      role="link"
+      tabIndex={0}
+      onClick={handleNavigate}
+      onKeyDown={handleKeyDown}
+      aria-label={`${project.title} project summary`}
     >
       <header className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
         <div>
@@ -47,19 +62,21 @@ export function ProjectCard({ project }: ProjectCardProps) {
         )}
       </header>
 
+      <p className="text-sm text-muted">{project.summary}</p>
+
       <ul className="space-y-2 text-sm text-muted">
-        {project.impact.map((bullet, index) => (
+        {project.achievements.slice(0, 2).map((bullet, index) => (
           <li key={index} className="leading-relaxed">
             {bullet}
           </li>
         ))}
       </ul>
 
-      {project.tech.length > 0 && (
+      {project.cardKeywords.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          {project.tech.map((tech) => (
-            <span key={tech} className="rounded-full border border-white/10 bg-surface/70 px-3 py-1 text-xs text-subtle">
-              {tech}
+          {project.cardKeywords.map((keyword) => (
+            <span key={keyword} className="rounded-full border border-white/10 bg-surface/70 px-3 py-1 text-xs text-subtle">
+              {keyword}
             </span>
           ))}
         </div>
@@ -76,6 +93,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 target="_blank"
                 rel="noreferrer noopener"
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-semibold text-muted transition hover:border-accent/60 hover:text-foreground"
+                onClick={(event) => event.stopPropagation()}
               >
                 {Icon ? <Icon className="h-4 w-4" aria-hidden /> : null}
                 {link.label}
@@ -90,7 +108,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {!embedVisible ? (
             <button
               type="button"
-              onClick={showEmbed}
+              onClick={(event) => {
+                event.stopPropagation();
+                showEmbed();
+              }}
+              onKeyDown={(event) => event.stopPropagation()}
               className="w-full rounded-xl border border-white/10 bg-surface/60 px-4 py-3 text-sm font-semibold text-muted transition hover:border-accent/60 hover:text-foreground"
             >
               Preview project
@@ -100,6 +122,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
       )}
+
+      <div className="flex justify-end">
+        <span className="inline-flex text-sm font-semibold text-accent transition group-hover:text-info">
+          View project
+        </span>
+      </div>
     </motion.article>
   );
 }

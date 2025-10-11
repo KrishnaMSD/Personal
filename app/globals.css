@@ -65,8 +65,8 @@ a {
 
 a:hover,
 a:focus-visible {
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--color-accent) 75%, transparent);
+  text-decoration: none;
+  color: color-mix(in srgb, var(--color-accent) 65%, var(--color-foreground) 35%);
 }
 
 img,
@@ -118,5 +118,9 @@ textarea {
 
   .text-subtle {
     color: var(--color-subtle);
+  }
+
+  .d-none {
+    display: none !important;
   }
 }

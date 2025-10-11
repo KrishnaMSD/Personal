@@ -81,7 +81,7 @@ function TimelineItem({ item, index }: TimelineItemProps) {
             className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent transition hover:text-info focus-visible:focus-ring"
             aria-expanded={expanded}
           >
-            {expanded ? "Show less" : "Read more"}
+            {expanded ? "Show less" : "Show more"}
             <ChevronDown className={`h-4 w-4 transition ${expanded ? "rotate-180" : "rotate-0"}`} />
           </button>
         )}

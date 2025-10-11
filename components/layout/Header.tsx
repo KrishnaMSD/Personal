@@ -76,7 +76,8 @@ export function Header({ onContactClick }: HeaderProps) {
                 className={cn(
                   "relative rounded-full px-4 py-2 text-sm font-medium transition",
                   "hover:text-foreground/90 focus-visible:focus-ring",
-                  isActive ? "text-foreground" : "text-subtle"
+                  isActive ? "text-foreground" : "text-subtle",
+                  link.label === "Articles" ? "d-none" : undefined
                 )}
               >
                 {link.label}
@@ -140,7 +141,8 @@ export function Header({ onContactClick }: HeaderProps) {
                       className={cn(
                         "flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition",
                         isActive ? "bg-accent/15 text-foreground" : "bg-transparent text-muted",
-                        "hover:bg-surface/80"
+                        "hover:bg-surface/80",
+                        link.label === "Articles" ? "d-none" : undefined
                       )}
                     >
                       <span>{link.label}</span>

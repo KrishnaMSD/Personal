@@ -34,6 +34,14 @@ export function DownloadCard({ item }: DownloadCardProps) {
       <p className="text-sm text-muted">
         Download a polished {item.label.toLowerCase()} tailored for data science and full-stack roles.
       </p>
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-surface/60">
+        <iframe
+          src={`${item.file}#toolbar=0&navpanes=0`}
+          title={`${item.label} preview`}
+          className="h-[420px] w-full"
+          loading="lazy"
+        />
+      </div>
       <div className="flex flex-wrap items-center gap-3">
         <a
           href={item.file}
