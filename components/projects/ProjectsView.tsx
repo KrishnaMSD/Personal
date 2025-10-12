@@ -46,7 +46,8 @@ export function ProjectsView() {
     });
 
     const curated = CURATED_TAGS.filter((tag) => counts.has(tag));
-    const ensureActive = activeTags.filter((tag) => counts.has(tag) && !curated.includes(tag));
+    const curatedSet = new Set<string>(curated);
+    const ensureActive = activeTags.filter((tag) => counts.has(tag) && !curatedSet.has(tag));
 
     return [...curated, ...ensureActive];
   }, [activeTags]);
