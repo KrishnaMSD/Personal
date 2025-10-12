@@ -14,6 +14,22 @@ type ProjectGroup = (typeof siteContent.projects)[number];
 
 type FilteredGroup = ProjectGroup & { filteredItems: ProjectGroup["items"] };
 
+const CURATED_TAGS = [
+  "Generative AI",
+  "Analytics",
+  "Sales Automation",
+  "Web Development",
+  "API Development",
+  "SQL",
+  "Architecture Design",
+  "Error Analysis",
+  "Speech Models",
+  "Dashboards",
+  "Prompt Engineering",
+  "Chatbot",
+  "Multimodal Modelling",
+] as const;
+
 export function ProjectsView() {
   const [query, setQuery] = useState("");
   const [activeTags, setActiveTags] = useState<string[]>([]);
@@ -29,16 +45,10 @@ export function ProjectsView() {
       });
     });
 
-    const maxTags = 18;
-    const sorted = Array.from(counts.entries()).sort((a, b) => {
-      if (b[1] !== a[1]) return b[1] - a[1];
-      return a[0].localeCompare(b[0]);
-    });
+    const curated = CURATED_TAGS.filter((tag) => counts.has(tag));
+    const ensureActive = activeTags.filter((tag) => counts.has(tag) && !curated.includes(tag));
 
-    const topTags = sorted.slice(0, maxTags).map(([tag]) => tag);
-    const ensureActive = activeTags.filter((tag) => counts.has(tag) && !topTags.includes(tag));
-
-    return [...topTags, ...ensureActive];
+    return [...curated, ...ensureActive];
   }, [activeTags]);
 
   const groups = useMemo<FilteredGroup[]>(() => {

@@ -1,22 +1,119 @@
 "use server";
 
 import { promises as fs } from "fs";
+import os from "os";
 import path from "path";
 import nodemailer from "nodemailer";
 
 import { contactSchema, type ContactFormInput } from "@/lib/validation/contact";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+const STORAGE_ROOT =
+  process.env.CONTACT_STORAGE_DIR != null
+    ? path.resolve(process.env.CONTACT_STORAGE_DIR)
+    : process.env.NODE_ENV === "production"
+      ? path.join(process.env.TMPDIR ?? os.tmpdir(), "portfolio-contact")
+      : path.join(process.cwd(), "data");
+const DATA_DIR = STORAGE_ROOT;
 const DATA_FILE = path.join(DATA_DIR, "contact-submissions.json");
 const RATE_LIMIT_WINDOW_MS = 1000 * 60 * 5; // 5 minutes
 const RATE_LIMIT_MAX = 3;
 
+type ContactEntry = ContactPayload & { timestamp: number };
+
+const memoryStoreContainer = globalThis as typeof globalThis & {
+  __portfolioContactEntries?: ContactEntry[];
+};
+
+if (!memoryStoreContainer.__portfolioContactEntries) {
+  memoryStoreContainer.__portfolioContactEntries = [];
+}
+
+const memoryStore = memoryStoreContainer.__portfolioContactEntries;
+
+let isFileStorageWritable: boolean | undefined;
+
 async function ensureDataFile() {
+  if (isFileStorageWritable === false) {
+    return false;
+  }
+
   try {
     await fs.mkdir(DATA_DIR, { recursive: true });
     await fs.access(DATA_FILE);
   } catch {
-    await fs.writeFile(DATA_FILE, JSON.stringify([]), "utf-8");
+    try {
+      await fs.writeFile(DATA_FILE, JSON.stringify([]), "utf-8");
+    } catch (error) {
+      isFileStorageWritable = false;
+      console.warn(
+        "Contact submissions file storage unavailable. Falling back to in-memory storage.",
+        error,
+      );
+      return false;
+    }
+  }
+
+  isFileStorageWritable = true;
+  return true;
+}
+
+async function readEntries(): Promise<ContactEntry[]> {
+  const canUseFile = await ensureDataFile();
+  if (!canUseFile) {
+    return memoryStore;
+  }
+
+  try {
+    const raw = await fs.readFile(DATA_FILE, "utf-8");
+    const parsedEntries = JSON.parse(raw) as ContactEntry[];
+    memoryStore.splice(0, memoryStore.length, ...parsedEntries);
+    return parsedEntries;
+  } catch (error) {
+    const nodeError = error as NodeJS.ErrnoException;
+    if (nodeError.code === "ENOENT") {
+      try {
+        await fs.writeFile(DATA_FILE, JSON.stringify([], null, 2), "utf-8");
+        memoryStore.length = 0;
+        return memoryStore;
+      } catch (writeError) {
+        isFileStorageWritable = false;
+        console.warn(
+          "Unable to initialise contact submissions file. Switching to in-memory storage.",
+          writeError,
+        );
+        memoryStore.length = 0;
+        return memoryStore;
+      }
+    }
+
+    console.warn(
+      "Failed to read contact submissions file. Continuing with in-memory storage.",
+      error,
+    );
+    isFileStorageWritable = false;
+    return memoryStore;
+  }
+}
+
+async function writeEntries(entries: ContactEntry[]) {
+  memoryStore.splice(0, memoryStore.length, ...entries);
+
+  if (isFileStorageWritable === false) {
+    return;
+  }
+
+  if (!(await ensureDataFile())) {
+    return;
+  }
+
+  try {
+    await fs.writeFile(DATA_FILE, JSON.stringify(entries, null, 2), "utf-8");
+  } catch (error) {
+    isFileStorageWritable = false;
+    console.warn(
+      "Failed to persist contact submissions to the filesystem. Remaining on in-memory storage.",
+      error,
+    );
   }
 }
 
@@ -46,7 +143,7 @@ async function deliverEmail(payload: ContactPayload) {
 
   const port = Number.parseInt(portRaw, 10);
   const isConfigured = host.length > 0 && !Number.isNaN(port) && port > 0 && toAddress.length > 0 && fromAddress.length > 0;
-
+  console.log("Contact email configuration:", { isConfigured, host, port, toAddress, fromAddress });
   if (!isConfigured) {
     if (process.env.NODE_ENV !== "production") {
       console.warn("Contact email delivery skipped. Configure SMTP_* and CONTACT_* environment variables to enable email notifications.");
@@ -78,7 +175,7 @@ async function deliverEmail(payload: ContactPayload) {
     <p><strong>Message:</strong><br/>${escapeHtml(payload.message).replace(/\n/g, "<br/>")}</p>
   `;
 
-  await transporter.sendMail({
+  const emailSent = await transporter.sendMail({
     to: toAddress,
     from: fromAddress,
     subject: `New portfolio contact from ${payload.name}`,
@@ -86,6 +183,7 @@ async function deliverEmail(payload: ContactPayload) {
     html: htmlMessage,
     replyTo: payload.email,
   });
+  console.log("Contact email sent:", emailSent);
 
   return true;
 }
@@ -100,16 +198,7 @@ export async function submitContact(values: ContactFormInput) {
     } as const;
   }
 
-  await ensureDataFile();
-
-  const raw = await fs.readFile(DATA_FILE, "utf-8");
-  const entries = JSON.parse(raw) as Array<{
-    name: string;
-    email: string;
-    mobile?: string;
-    message: string;
-    timestamp: number;
-  }>;
+  const entries = await readEntries();
 
   const now = Date.now();
   const recent = entries.filter((entry) => now - entry.timestamp <= RATE_LIMIT_WINDOW_MS);
@@ -138,7 +227,7 @@ export async function submitContact(values: ContactFormInput) {
   };
 
   const updated = [...recent, nextEntry];
-  await fs.writeFile(DATA_FILE, JSON.stringify(updated, null, 2), "utf-8");
+  await writeEntries(updated);
 
   try {
     await deliverEmail(payload);

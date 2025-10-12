@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Twitter, Globe } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter, Globe, Instagram as InstagramIcon } from "lucide-react";
 
 import { siteContent } from "@/content/siteContent";
 import { StatCard } from "./StatCard";
@@ -16,6 +16,7 @@ const socialIcons: Record<SocialLabel, typeof Github> = {
   Email: Mail,
   X: Twitter,
   Portfolio: Globe,
+  Instagram: InstagramIcon,
 };
 
 export function Hero() {

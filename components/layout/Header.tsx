@@ -16,7 +16,7 @@ const navLinks = [
   { label: "Home", href: "#home", type: "section" as const },
   { label: "Projects", href: "/projects" satisfies Route, type: "route" as const },
   { label: "Articles", href: "/articles" satisfies Route, type: "route" as const },
-  { label: "Downloads", href: "/downloads" satisfies Route, type: "route" as const },
+  { label: "Resumes", href: "/downloads" satisfies Route, type: "route" as const },
 ] as const;
 
 interface HeaderProps {

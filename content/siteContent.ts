@@ -8,7 +8,7 @@ export interface SiteContent {
     headshotSrc: string;
     logoImg: string;
     bioShort: string;
-    socials: { label: "GitHub" | "LinkedIn" | "Email" | "X" | "Portfolio"; href: string }[];
+    socials: { label: "GitHub" | "LinkedIn" | "Email" | "X" | "Portfolio" | "Instagram"; href: string }[];
     stats: { label: string; value: number; suffix?: string; prefix?: string }[];
   };
   skills: {
@@ -84,7 +84,7 @@ export interface ProjectItem {
   cardKeywords: string[];
   keywords: string[];
   website?: string;
-  links?: { label: "Live" | "GitHub" | "Article" | "Video"; href: string }[];
+  links?: { label: "Live" | "GitHub" | "Article" | "Video" | "Download"; href: string }[];
   embed?: { type: "iframe" | "img" | "video"; src: string; alt?: string };
   relevantSlugs: string[];
 }
@@ -103,6 +103,7 @@ export const siteContent: SiteContent = {
     socials: [
       { label: "GitHub", href: "https://github.com/KrishnaMSD" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/krishna-kalakonda" },
+      { label: "Instagram", href: "https://www.instagram.com/krishna.kalakonda/" },
       { label: "Email", href: "mailto:krishnakalakonda123@gmail.com" },
     ],
     stats: [
@@ -403,13 +404,15 @@ export const siteContent: SiteContent = {
             "",
             "Although the full implementation was not completed before departing for graduate studies, the project delivered a comprehensive architectural blueprint that outlined data flows, module interactions, error handling, and scalability considerations. It laid the groundwork for a future where AI-driven agents could handle SDR tasks end-to-end, promising to dramatically increase efficiency and consistency in sales outreach while ensuring personalization and compliance with each company’s unique policies.",
           ].join("\n"),
-          cardKeywords: ["Multi-agent AI", "Sales Automation", "Workflow Orchestration", "Architecture"],
+          cardKeywords: ["Multi-agent AI", "Sales Automation", "Architecture Design"],
           keywords: [
             "AI Automation",
             "Multi-Agent Systems",
             "Sales Enablement",
+            "Sales Automation",
             "Workflow Orchestration",
             "Natural Language Processing",
+            "Prompt Engineering",
             "Architecture Design",
             "Data Integration",
           ],
@@ -440,11 +443,16 @@ export const siteContent: SiteContent = {
             "",
             "These optimizations resulted in substantial improvements: call duration dropped from 45 seconds to 15 seconds, making the system 5 times faster and 3 times cheaper. Error rates decreased by 97%, while the accuracy of lead validation increased from 88% to 94%. These improvements not only reduced operational costs but also significantly boosted the efficiency of the lead verification process by 120%. For my contributions, I was recognized as the best employee of the month, showcasing how thoughtful design and continuous optimization can transform a system into a high-performing, cost-effective solution.",
           ].join("\n"),
-          cardKeywords: ["LLM Calls", "Lead Quality", "Voice Automation", "Twilio"],
+          cardKeywords: ["Chatbot", "Multimodal modelling", "Sales Automation"],
           keywords: [
             "Lead Verification",
             "Speech-to-Text",
             "Text-to-Speech",
+            "Speech Models",
+            "Chatbot",
+            "API Development",
+            "Web Development",
+            "SQL",
             "Twilio",
             "Plivo",
             "Telnyx",
@@ -452,6 +460,10 @@ export const siteContent: SiteContent = {
             "AWS",
             "Error Analysis",
             "System Architecture",
+            "Multimodal Modelling",
+            "Huggingface",
+            "Transformers",
+            "Python"
           ],
           website: "http://sureconnect.ai",
           relevantSlugs: ["ai-sales-agent", "objection-handling-copilot", "sequence-generator"],
@@ -478,21 +490,26 @@ export const siteContent: SiteContent = {
             "",
             "Magic Mail successfully reduced the time spent by SDRs on drafting emails by 250% while also improving the email outreach by 80%. By automating the process of email creation and response handling, SDRs were able to focus on more strategic tasks, like relationship-building, and significantly improve their outreach efforts. The system continuously evolved, incorporating feedback and industry best practices to create a tool that adapted to changing needs and maximized effectiveness for sales teams.",
           ].join("\n"),
-          cardKeywords: ["Generative Email", "Persona Tuning", "Outreach Automation", "Analytics"],
+          cardKeywords: ["Generative AI", "Sales Automation", "Prompt Engineering"],
           keywords: [
             "Email Personalization",
             "Prompt Engineering",
+            "Generative AI",
             "Sales Enablement",
-            "Mixpanel Analytics",
+            "Sales Copywriting",
             "Knowledge Bases",
-            "Compliance Guardrails",
+            "LLM Fine-Tuning",
+            "Workflow Automation",
+            "Fast API",
+            "Postgre SQL",
+            "Python"
           ],
           website: "https://outplay.ai/ai-for-sales",
           relevantSlugs: ["sequence-generator", "ai-sales-agent", "objection-handling-copilot"],
         },
         {
           slug: "objection-handling-copilot",
-          title: "Objection Handling Copilot",
+          title: "Objection Handling",
           timeframe: "2022 — 2023",
           tagline: "Real-time rebuttals for sales objections",
           summary:
@@ -510,13 +527,18 @@ export const siteContent: SiteContent = {
             "",
             "The final solution enabled SDRs to automatically detect objections, significantly reducing the time spent manually reading and sorting emails. By streamlining the objection-handling process, the system helped SDRs respond faster, prioritize more effectively, and ultimately improve their productivity and sales performance.",
           ].join("\n"),
-          cardKeywords: ["Objection Detection", "Real-time Coaching", "NLP", "Sales Enablement"],
+          cardKeywords: ["NER", "Huggingface", "NLP", "spaCy"],
           keywords: [
             "Objection Classification",
-            "NER",
+            "Named Entity Recognition (NER)",
             "Sales Coaching",
             "Enablement Playbooks",
             "Conversation Intelligence",
+            "Huggingface",
+            "spaCy",
+            "Fast API",
+            "Postgre SQL",
+            "Python"
           ],
           website: "https://outplay.ai/ai-for-sales",
           relevantSlugs: ["magic-mail", "sequence-generator", "sureconnect-phone-verified-leads"],
@@ -543,7 +565,7 @@ export const siteContent: SiteContent = {
             "",
             "The Sequence Generator provided flexibility, speed, and precision, helping SDRs create high-quality, personalized sequences much faster. With the ability to experiment with different types of outreach (emails, calls, LinkedIn messages) and dynamically add or adjust steps, the tool significantly enhanced productivity and improved the overall efficiency of the sales outreach process.",
           ].join("\n"),
-          cardKeywords: ["Sequence Automation", "Generative AI", "Multichannel Outreach", "Experimentation"],
+          cardKeywords: ["Generative AI", "MongoDB", "Fast API"],
           keywords: [
             "Outreach Automation",
             "Generative AI",
@@ -551,6 +573,10 @@ export const siteContent: SiteContent = {
             "MongoDB",
             "Real-time UX",
             "Sales Operations",
+            "API Development",
+            "Workflow Automation",
+            "Prompt Engineering",
+            "Python"
           ],
           website: "https://outplay.ai/ai-sequence-generator",
           relevantSlugs: ["magic-mail", "ai-sales-agent", "sureconnect-phone-verified-leads"],
@@ -579,11 +605,10 @@ export const siteContent: SiteContent = {
             "",
             "The resulting workflow achieved a 0.82 F1 score while raising sensitivity for underrepresented gender cohorts by 14%. Comprehensive documentation, evaluation rubrics, and bias reviews created a repeatable path for future IRB approvals and kept clinical partners confident in how the model evolved.",
           ].join("\n"),
-          cardKeywords: ["Clinical Analytics", "Fairness", "Interpretable ML", "Python"],
+          cardKeywords: ["Clinical Analytics", "Interpretable ML", "Python"],
           keywords: [
             "Healthcare AI",
             "Feature Engineering",
-            "Fairness Audits",
             "Explainability",
             "Logistic Regression",
             "XGBoost",
@@ -594,7 +619,7 @@ export const siteContent: SiteContent = {
         {
           slug: "gesture-prediction",
           title: "Gesture Prediction",
-          timeframe: "2023",
+          timeframe: "2024",
           tagline: "sEMG-driven assistive models",
           summary:
             "Classified muscle signals using ensemble models to power responsive assistive wearables.",
@@ -603,20 +628,29 @@ export const siteContent: SiteContent = {
             "Benchmarked ensemble models, landing on XGBoost with 82.6% accuracy.",
           ],
           description: [
-            "Gesture recognition wearables require reliable multi-class predictions from noisy surface EMG signals. The project set out to translate raw muscle activation data into real-time intent classifications that could support assistive devices.",
+            "Surface electromyography (sEMG) signals capture muscle activity and power prosthetics, rehabilitation programs, and human-computer interaction systems. Yet the signals are noisy and highly variable across participants, making gesture classification difficult. This course project tackled that challenge by building an end-to-end pipeline to recognize hand and wrist gestures from raw sEMG recordings.",
             "",
-            "I engineered spectral and temporal features, built a preprocessing pipeline to denoise signals, and compared classical ensemble methods under identical conditions. XGBoost emerged as the best-performing model, and I wrapped the evaluation workflow in dashboards that highlighted confusion matrices, latency metrics, and hardware calibration guidance.",
+            "The work began by sourcing a multi-subject dataset in which forty participants performed ten gestures plus a rest state, with four forearm electrodes sampled at 2 kHz. I applied a sixth-order Butterworth bandpass filter (5-500 Hz) and a notch filter at 50 Hz to suppress interference, then segmented the signals into 250 ms windows with 50% overlap to preserve temporal dynamics.",
             "",
-            "The final models delivered 82.6% multi-class accuracy with low-latency inference, plus a ~90% success rate on rest-versus-activity detection. These insights informed future neuroprosthetics experiments and provided reproducible notebooks for continued iteration.",
+            "Feature extraction was comprehensive: twenty-four time- and frequency-domain metrics per channel—mean absolute value, RMS, variance, zero crossings, spectral power, mean and median frequency, entropy, Hjorth parameters, and more—yielded 96 features per segment. Exploratory analysis and correlation studies guided transformations to reduce skew and temper outliers.",
+            "",
+            "To avoid overfitting, I pruned highly correlated features, evaluated ensemble feature importances, and used backward elimination to isolate the most discriminative signals. The dataset split participants between training and test sets to prevent leakage, retaining generalization across unseen subjects.",
+            "",
+            "Multiple classifiers—Decision Trees, Random Forests, XGBoost, and Support Vector Machines—were tuned via grid search with accuracy, precision, recall, and F1-score benchmarks. XGBoost achieved 82.6% multi-class accuracy, outperforming Random Forests (70.6%) and Decision Trees (65.3%), while a dedicated rest-versus-activity classifier reached roughly 90% accuracy.",
+            "",
+            "The result is a reproducible sEMG analytics workflow that pairs robust preprocessing with ensemble learning to deliver reliable intent detection for assistive wearables. The notebooks document calibration guidance and evaluation dashboards so future teams can extend the models or port them to embedded hardware.",
           ].join("\n"),
-          cardKeywords: ["sEMG Signals", "Time-Series ML", "Assistive Tech", "Edge Readiness"],
+          cardKeywords: ["Signal Procesing", "Time-Series ML", "Data Analysis"],
           keywords: [
             "Signal Processing",
             "Feature Engineering",
+            "Decision Trees",
+            "Feature Selection",
             "XGBoost",
             "Time-Series Classification",
-            "Assistive Technology",
+            "Analytics",
           ],
+          links: [{ label: "Download", href: "/downloads/gesture-prediction.pdf" }],
           relevantSlugs: ["adhd-gender-prediction", "iot-sensing-projects", "galaxy-type-classification"],
         },
         {
@@ -625,25 +659,29 @@ export const siteContent: SiteContent = {
           timeframe: "2022",
           tagline: "Transfer learning for astronomy",
           summary:
-            "Adapted convolutional networks to classify Sloan Digital Sky Survey images with explainability overlays.",
+            "Adapted machine learning algorithms to classify galaxy types based on shape and roatation",
           achievements: [
-            "Fine-tuned pretrained CNNs with augmentation to reach 88.7% macro accuracy.",
-            "Generated saliency maps so club members could trust predictions.",
+            "Trained multinomial logistic regression model to reach 88.7% macro accuracy.",
+            "Manually created the multinomial logistic regression model using logistic regression base models.",
           ],
           description: [
-            "Amateur astronomers wanted a lightweight tool to categorize Sloan Digital Sky Survey imagery without building models from scratch. The project focused on adapting convolutional neural networks so club members could explore galaxies with confidence.",
+            "Analyzed the galaxy types dataset to identify the properties that decide the type of galaxy. The types were classified into Spiral, Elliptical and Uncertain.",
             "",
-            "I fine-tuned pretrained CNNs with aggressive augmentation to account for limited labeled data, then layered Grad-CAM saliency maps to visualize which features drove each prediction. The insights were packaged into an interactive dashboard for club workshops and outreach events.",
+            "The course project needed us to try using regression models for classification. Since this is a multi class classification, we had to use multinomial logistic regression model. ",
             "",
-            "The final model achieved 88.7% macro accuracy on holdout images, improved astronomy club engagement, and produced a reusable dataset plus notebooks for future astrophotography experiments.",
+            "Out of curiosity, we have created the logistic regression model for each shape and then combined all three models using arg max function to create the mulltinomial regression model.",
+            "",
+            "We have found that the sensitivity, specificity and accuracy of both models came out to be the same proving that logistic regression models are base for multinomial regression model."
           ].join("\n"),
-          cardKeywords: ["Astrophysics", "Transfer Learning", "CNN", "Visualization"],
+          cardKeywords: ["Regression", "Visualization", "Analytics"],
           keywords: [
-            "Astrophotography",
-            "Convolutional Networks",
-            "Grad-CAM",
+            "Astrophysics",
             "Data Augmentation",
-            "STEM Outreach",
+            "Feature Engineering",
+            "Feature Selection",
+            "Logistic Regression",
+            "Multinomial Regression",
+            "R language"
           ],
           relevantSlugs: ["adhd-gender-prediction", "gesture-prediction", "phishing-website-detection"],
         },
@@ -665,7 +703,7 @@ export const siteContent: SiteContent = {
             "",
             "To make the model usable, I wrapped it in a Flask web app where users could enter URLs and receive instant legitimacy predictions. The tool demonstrated how ensemble learning and thoughtful feature engineering could be packaged into an accessible cybersecurity assistant.",
           ].join("\n"),
-          cardKeywords: ["Cybersecurity", "Random Forest", "URL Features", "Flask App"],
+          cardKeywords: ["Flask", "Random Forest", "Feature Extraction"],
           keywords: [
             "Cybersecurity",
             "Random Forest",
@@ -673,6 +711,8 @@ export const siteContent: SiteContent = {
             "Flask",
             "Web Application",
             "Threat Detection",
+            "Decision Trees",
+            "kNN"
           ],
           relevantSlugs: ["data-viz-pro", "gesture-prediction", "galaxy-type-classification"],
         },
@@ -700,13 +740,16 @@ export const siteContent: SiteContent = {
             "",
             "When users advance to modeling, they can train scikit-learn algorithms, review train/test metrics, and download both the cleaned dataset and model artifacts. The result is an approachable yet rigorous playground that empowers classrooms and newcomers to experiment with end-to-end workflows in minutes.",
           ].join("\n"),
-          cardKeywords: ["No-Code Analytics", "Streamlit", "Model Ops", "Data Education"],
+          cardKeywords: ["Data Visualization", "Streamlit", "Model Ops"],
           keywords: [
             "Streamlit",
             "Data Visualization",
             "Educational Tools",
             "Model Evaluation",
             "Interactive Dashboards",
+            "Dashboards",
+            "Analytics",
+            "Web Development",
           ],
           relevantSlugs: ["conversation-intelligence", "adhd-gender-prediction", "phishing-website-detection"],
         },
@@ -728,12 +771,18 @@ export const siteContent: SiteContent = {
             "",
             "The system culminated in dashboards that put call scores, module-specific metrics, and coaching cues in front of managers. By packaging detailed analytics into an accessible view, SDRs received faster feedback and operations teams gained the data needed to prioritize training.",
           ].join("\n"),
-          cardKeywords: ["Call Analytics", "SpeechBrain", "Insight Dashboards", "Sales Coaching"],
+          cardKeywords: ["Data Analytics", "Generative AI", "Multimodal modelling"],
           keywords: [
             "Speech Recognition",
             "Speaker Identification",
+            "Text to speech",
+            "Transcription",
             "Call Scoring",
+            "Named Entity Recognition (NER)",
             "NLP",
+            "Speech Models",
+            "Analytics",
+            "Dashboards",
             "Sales Enablement",
             "WebSockets",
           ],
@@ -758,11 +807,13 @@ export const siteContent: SiteContent = {
             "",
             "The outcome validated automation feasibility, provided leadership with a pragmatic build-vs-buy recommendation, and fed critical learnings into subsequent Conversation Intelligence initiatives.",
           ].join("\n"),
-          cardKeywords: ["Zoom SDK", "Real-time Streaming", "Automation", "Prototype"],
+          cardKeywords: ["Websockets", "Real-time Streaming", "Automation", "Prototype"],
           keywords: [
             "Zoom SDK",
             "Real-time Streaming",
             "API Integration",
+            "Fast API",
+            "Python",
             "WebSockets",
             "Product Discovery",
           ],
@@ -786,20 +837,21 @@ export const siteContent: SiteContent = {
             "Developed predictive maintenance alerts that flag anomalies before downtime.",
           ],
           description: [
-            "Campus operations teams needed affordable ways to monitor environmental conditions across labs and dorms. I led a series of IoT prototypes that combined Arduino and ESP32 hardware with cloud dashboards to surface real-time insights.",
+            "Campus operations teams needed affordable ways to monitor environmental conditions across labs and dorms. I led a series of IoT prototypes that combined Arduino and ESP32 hardware with  dashboards to surface real-time insights.",
             "",
             "We instrumented sensors for temperature, humidity, and vibration, implemented lightweight edge analytics to flag anomalies, and built dashboards so staff could triage maintenance issues before they escalated. Documentation and workshops helped student teams replicate and extend each build.",
             "",
             "The initiative reduced downtime risk, equipped facilities staff with actionable telemetry, and inspired iterative student-led projects that reused the modular architecture.",
           ].join("\n"),
-          cardKeywords: ["Edge Monitoring", "ESP32", "Predictive Maintenance", "IoT Coaching"],
+          cardKeywords: ["Embedded Systems", "Arduino", "IoT Coaching"],
           keywords: [
             "Arduino",
-            "Edge Analytics",
             "Sensor Networks",
             "Data Dashboards",
-            "Predictive Maintenance",
+            "Dashboards",
+            "Analytics",
             "Student Mentorship",
+            "Embedded C"
           ],
           relevantSlugs: ["gesture-prediction", "data-viz-pro", "zoom-meeting-assistant"],
         },

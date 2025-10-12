@@ -4,7 +4,7 @@ import Image from "next/image";
 import { KeyboardEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useInView } from "framer-motion";
-import { ExternalLink, Github, Globe, MonitorPlay } from "lucide-react";
+import { Download as DownloadIcon, ExternalLink, Github, Globe, MonitorPlay } from "lucide-react";
 
 import type { ProjectItem } from "@/content/siteContent";
 
@@ -13,6 +13,7 @@ const linkIcons = {
   GitHub: Github,
   Article: ExternalLink,
   Video: MonitorPlay,
+  Download: DownloadIcon,
 };
 
 interface ProjectCardProps {

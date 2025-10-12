@@ -8,7 +8,7 @@ const footerLinks = [
   { label: "Home", href: "#home" },
   { label: "Projects", href: "/projects" satisfies Route },
   { label: "Articles", href: "/articles" satisfies Route },
-  { label: "Downloads", href: "/downloads" satisfies Route },
+  { label: "Resumes", href: "/downloads" satisfies Route },
 ] as const;
 
 export function Footer() {

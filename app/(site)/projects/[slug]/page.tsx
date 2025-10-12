@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, Download as DownloadIcon, ExternalLink, Github, Globe, MonitorPlay } from "lucide-react";
 
 import { projectEntries, projectIndex } from "@/content/siteContent";
 import { ProjectCard } from "@/components/projects/ProjectCard";
@@ -11,6 +11,16 @@ type ProjectPageParams = { slug: string };
 interface ProjectPageProps {
   params: Promise<ProjectPageParams>;
 }
+
+type ProjectLinkLabel = NonNullable<(typeof projectEntries)[number]["links"]>[number]["label"];
+
+const detailLinkIcons: Record<ProjectLinkLabel, typeof ExternalLink> = {
+  Live: Globe,
+  GitHub: Github,
+  Article: ExternalLink,
+  Video: MonitorPlay,
+  Download: DownloadIcon,
+};
 
 export function generateStaticParams() {
   return projectEntries.map((project) => ({ slug: project.slug }));
@@ -111,6 +121,26 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               Visit website
               <ExternalLink className="h-4 w-4" aria-hidden />
             </a>
+          </div>
+        )}
+
+        {project.links && project.links.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {project.links.map((link) => {
+              const Icon = detailLinkIcons[link.label];
+              return (
+                <a
+                  key={`${project.slug}-${link.label}`}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-semibold text-muted transition hover:border-accent/60 hover:text-foreground"
+                >
+                  {Icon ? <Icon className="h-4 w-4" aria-hidden /> : null}
+                  {link.label === "Download" ? "Download paper" : link.label}
+                </a>
+              );
+            })}
           </div>
         )}
 
