@@ -17,6 +17,7 @@ const DATA_DIR = STORAGE_ROOT;
 const DATA_FILE = path.join(DATA_DIR, "contact-submissions.json");
 const RATE_LIMIT_WINDOW_MS = 1000 * 60 * 5; // 5 minutes
 const RATE_LIMIT_MAX = 3;
+const MAX_STORED_ENTRIES = 500;
 
 type ContactEntry = ContactPayload & { timestamp: number };
 
@@ -133,7 +134,26 @@ interface ContactPayload {
   message: string;
 }
 
-async function deliverEmail(payload: ContactPayload) {
+type EmailDeliveryResult =
+  | { ok: true; provider: "smtp"; messageId?: string }
+  | {
+      ok: false;
+      reason: "unconfigured" | "delivery_failed";
+      message: string;
+      error?: unknown;
+    };
+
+function getFallbackContactTarget() {
+  const fromEnv =
+    process.env.CONTACT_FALLBACK_EMAIL ??
+    process.env.CONTACT_TO_EMAIL ??
+    process.env.CONTACT_FROM_EMAIL ??
+    process.env.SMTP_USER ??
+    "";
+  return fromEnv.trim();
+}
+
+async function deliverEmail(payload: ContactPayload): Promise<EmailDeliveryResult> {
   const host = process.env.SMTP_HOST ?? "";
   const portRaw = process.env.SMTP_PORT ?? "";
   const user = process.env.SMTP_USER;
@@ -148,7 +168,16 @@ async function deliverEmail(payload: ContactPayload) {
     if (process.env.NODE_ENV !== "production") {
       console.warn("Contact email delivery skipped. Configure SMTP_* and CONTACT_* environment variables to enable email notifications.");
     }
-    return false;
+    const fallback = getFallbackContactTarget();
+    const message =
+      fallback.length > 0
+        ? `Message saved, but email forwarding isn't configured. Please email me directly at ${fallback}.`
+        : "Message saved, but email forwarding isn't configured. Please reach out via the email listed on the site.";
+    return {
+      ok: false,
+      reason: "unconfigured",
+      message,
+    };
   }
 
   const transporter = nodemailer.createTransport({
@@ -175,17 +204,35 @@ async function deliverEmail(payload: ContactPayload) {
     <p><strong>Message:</strong><br/>${escapeHtml(payload.message).replace(/\n/g, "<br/>")}</p>
   `;
 
-  const emailSent = await transporter.sendMail({
-    to: toAddress,
-    from: fromAddress,
-    subject: `New portfolio contact from ${payload.name}`,
-    text: plainMessage,
-    html: htmlMessage,
-    replyTo: payload.email,
-  });
-  console.log("Contact email sent:", emailSent);
-
-  return true;
+  try {
+    const emailSent = await transporter.sendMail({
+      to: toAddress,
+      from: fromAddress,
+      subject: `New portfolio contact from ${payload.name}`,
+      text: plainMessage,
+      html: htmlMessage,
+      replyTo: payload.email,
+    });
+    console.log("Contact email sent:", emailSent);
+    return {
+      ok: true,
+      provider: "smtp",
+      messageId: emailSent.messageId,
+    };
+  } catch (error) {
+    console.error("Failed to send contact email via SMTP transport.", error);
+    const fallback = getFallbackContactTarget();
+    const message =
+      fallback.length > 0
+        ? `Message saved, but email delivery failed. Please email me directly at ${fallback}.`
+        : "Message saved, but email delivery failed. Please reach out via the email listed on the site.";
+    return {
+      ok: false,
+      reason: "delivery_failed",
+      message,
+      error,
+    };
+  }
 }
 
 export async function submitContact(values: ContactFormInput) {
@@ -226,13 +273,16 @@ export async function submitContact(values: ContactFormInput) {
     timestamp: now,
   };
 
-  const updated = [...recent, nextEntry];
-  await writeEntries(updated);
+  const updated = [...entries, nextEntry];
+  const truncated = updated.slice(-MAX_STORED_ENTRIES);
+  await writeEntries(truncated);
 
-  try {
-    await deliverEmail(payload);
-  } catch (error) {
-    console.error("Failed to send contact email", error);
+  const delivery = await deliverEmail(payload);
+  if (!delivery.ok) {
+    return {
+      success: false,
+      error: { general: [delivery.message] },
+    } as const;
   }
 
   return {

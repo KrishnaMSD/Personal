@@ -102,7 +102,7 @@ export const siteContent: SiteContent = {
       "Data scientist and full-stack engineer bridging machine learning research with production software. I architect intelligent, explainable systems that turn raw signals into clear, observable outcomes for revenue, risk, and product teams.",
     socials: [
       { label: "GitHub", href: "https://github.com/KrishnaMSD" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/krishna-kalakonda" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/krishnakalakonda" },
       { label: "Instagram", href: "https://www.instagram.com/krishna.kalakonda/" },
       { label: "Email", href: "mailto:krishnakalakonda123@gmail.com" },
     ],
