@@ -107,7 +107,7 @@ export const siteContent: SiteContent = {
       { label: "Email", href: "mailto:krishnakalakonda123@gmail.com" },
     ],
     stats: [
-      { label: "Years experience", value: 2, suffix: "+" },
+      { label: "Years experience", value: 4, suffix: "+" },
       { label: "Projects", value: 15, suffix: "+" },
     ],
   },
