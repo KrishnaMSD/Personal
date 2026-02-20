@@ -142,21 +142,22 @@ export const siteContent: SiteContent = {
           "Time Series",
           "Prompt Engineering",
           "Feature Stores",
+          "Recommender Systems",
         ],
       },
       {
         name: "Database",
         level: 90,
-        tools: ["PostgreSQL", "MongoDB", "MySQL", "Snowflake"],
+        tools: ["PostgreSQL", "MongoDB", "MySQL", "Neo4j", "Qdrant"],
       },
       {
         name: "Cloud",
-        level: 50,
+        level: 75,
         tools: ["AWS", "Docker", "Jenkins", "CI/CD Pipelines"],
       },
       {
         name: "Frontend",
-        level: 65,
+        level: 75,
         tools: ["React", "Next.js", "Tailwind CSS", "Design Systems"],
       },
       {
@@ -179,11 +180,11 @@ export const siteContent: SiteContent = {
       title: "Full-Stack Data Scientist",
       metrics: [
         { axis: "Programming", score: 95 },
-        { axis: "Cloud", score: 50 },
+        { axis: "Cloud", score: 75 },
         { axis: "Artificial Intelligence", score: 90 },
         { axis: "Others", score: 60 },
         { axis: "Database", score: 90 },
-        { axis: "Frontend", score: 65 },
+        { axis: "Frontend", score: 75 },
         { axis: "Data Visualization", score: 90 },
         { axis: "Dev Ops", score: 70 },
         
