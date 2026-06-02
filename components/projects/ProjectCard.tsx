@@ -44,7 +44,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       initial={{ opacity: 0, y: 32 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className="surface-card group flex cursor-pointer flex-col gap-5 rounded-3xl border border-white/5 p-6 transition hover:border-accent/40"
+      className="group flex cursor-pointer flex-col gap-5 rounded-2xl border border-white/[0.06] bg-surface/60 p-6 transition card-hover"
       role="link"
       tabIndex={0}
       onClick={handleNavigate}
@@ -57,7 +57,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.tagline && <p className="mt-1 text-sm text-muted">{project.tagline}</p>}
         </div>
         {project.timeframe && (
-          <span className="rounded-full border border-info/40 bg-info/10 px-3 py-1 text-xs font-semibold text-info">
+          <span className="rounded-full border border-info/30 bg-info/10 px-3 py-1 text-[11px] font-semibold text-info">
             {project.timeframe}
           </span>
         )}
@@ -76,7 +76,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       {project.cardKeywords.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {project.cardKeywords.map((keyword) => (
-            <span key={keyword} className="rounded-full border border-white/10 bg-surface/70 px-3 py-1 text-xs text-subtle">
+            <span key={keyword} className="rounded-full border border-white/[0.06] bg-white/[0.03] px-2.5 py-0.5 text-[11px] text-subtle">
               {keyword}
             </span>
           ))}

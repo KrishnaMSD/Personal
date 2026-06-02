@@ -4,7 +4,6 @@ export interface SiteContent {
     title: string;
     location: string;
     email: string;
-    phone?: string;
     headshotSrc: string;
     logoImg: string;
     bioShort: string;
@@ -20,7 +19,7 @@ export interface SiteContent {
         | "Database"
         | "Cloud"
         | "Frontend"
-        | "DevOps"
+        | "MLOps"
         | "Creativity Tools"
         | "Others";
       level: number;
@@ -49,7 +48,7 @@ export interface SiteContent {
     gpa?: string;
   }[];
   activities: {
-    section: "Workshops" | "Hackathons" | "Extracurricular" | "Awards";
+    section: "Workshops" | "Hackathons" | "Extracurricular" | "Awards" | "Certifications";
     title: string;
     date?: string;
     bullets?: string[];
@@ -94,21 +93,22 @@ export const siteContent: SiteContent = {
     name: "Krishna Kalakonda",
     title: "Full-Stack Data Scientist",
     location: "Chicago, USA",
-    email: "krishnakalakonda123@gmail.com",
-    phone: "+1 (872) 314-4245",
-    headshotSrc: "/krishna.png",
+    email: "kkalakon@depaul.edu",
+    headshotSrc: "/krishna1.png",
     logoImg: "/favicon.svg",
     bioShort:
-      "Data scientist and full-stack engineer bridging machine learning research with production software. I architect intelligent, explainable systems that turn raw signals into clear, observable outcomes for revenue, risk, and product teams.",
+      "Full-stack data scientist with 3+ years of experience building AI-driven tools, data products, and analysis applications. I combine machine learning, full-stack development, and market research to turn complex business problems into clear, production-ready systems.",
     socials: [
       { label: "GitHub", href: "https://github.com/KrishnaMSD" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/krishnakalakonda" },
       { label: "Instagram", href: "https://www.instagram.com/krishna.kalakonda/" },
-      { label: "Email", href: "mailto:krishnakalakonda123@gmail.com" },
+      { label: "Email", href: "mailto:kkalakon@depaul.edu" },
     ],
     stats: [
-      { label: "Years experience", value: 4, suffix: "+" },
-      { label: "Projects", value: 15, suffix: "+" },
+      { label: "Years of experience", value: 3, suffix: "+" },
+      { label: "Projects shipped", value: 15, suffix: "+" },
+      { label: "ML models deployed", value: 9 },
+      { label: "Research roles", value: 3 },
     ],
   },
   skills: {
@@ -118,156 +118,168 @@ export const siteContent: SiteContent = {
         level: 95,
         tools: [
           "Python",
-          "TypeScript",
-          "JavaScript",
           "R",
+          "JavaScript",
           "Java",
-          "FastAPI",
-          "Node.js",
-          "Next.js",
+          "C",
+          "Matlab",
+          "HTML",
+          "CSS",
           "SQL",
+          "FastAPI",
+          "REST API",
+          "Flask",
+          "Streamlit",
+          "LangChain",
         ],
-      },
-      {
-        name: "Data Visualization",
-        level: 90,
-        tools: ["Tableau", "Plotly", "Matplotlib", "Power BI", "Seaborn"],
       },
       {
         name: "Machine Learning",
         level: 90,
         tools: [
-          "Interpretable ML",
+          "Scikit-learn",
+          "PyTorch",
+          "TensorFlow",
           "LLMs",
+          "NLP",
+          "Deep Learning",
           "Time Series",
           "Prompt Engineering",
-          "Feature Stores",
-          "Recommender Systems",
+          "RAG",
         ],
+      },
+      {
+        name: "Data Visualization",
+        level: 90,
+        tools: ["Tableau", "Plotly", "Matplotlib", "Seaborn", "Streamlit"],
       },
       {
         name: "Database",
         level: 90,
-        tools: ["PostgreSQL", "MongoDB", "MySQL", "Neo4j", "Qdrant"],
-      },
-      {
-        name: "Cloud",
-        level: 75,
-        tools: ["AWS", "Docker", "Jenkins", "CI/CD Pipelines"],
+        tools: ["PostgreSQL", "MongoDB", "MySQL"],
       },
       {
         name: "Frontend",
         level: 75,
-        tools: ["React", "Next.js", "Tailwind CSS", "Design Systems"],
+        tools: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS"],
       },
       {
-        name: "DevOps",
+        name: "Cloud",
+        level: 75,
+        tools: ["AWS", "Docker", "Jenkins", "Kubeflow", "Confluence"],
+      },
+      {
+        name: "MLOps",
         level: 70,
-        tools: ["Observability", "Mixpanel", "HubSpot", "Release Automation"],
+        tools: ["Git", "JIRA", "DataDog", "Mixpanel", "HubSpot", "CI/CD", "Model Monitoring"],
       },
       {
         name: "Creativity Tools",
         level: 70,
-        tools: ["Photoshop", "Canva", "TinkerCAD", "Premiere Pro"],
+        tools: ["Photoshop", "Canva", "Premiere Pro", "Tinker CAD"],
       },
       {
         name: "Others",
         level: 60,
-        tools: ["IoT", "Drone Tech", "3D Printing", "Workshop Facilitation"],
+        tools: ["IoT", "Drone Tech", "3D Printing"],
       },
     ],
     polar: {
       title: "Full-Stack Data Scientist",
       metrics: [
         { axis: "Programming", score: 95 },
-        { axis: "Cloud", score: 75 },
-        { axis: "Artificial Intelligence", score: 90 },
-        { axis: "Others", score: 60 },
+        { axis: "Machine Learning", score: 90 },
+        { axis: "Data Visualization", score: 90 },
         { axis: "Database", score: 90 },
         { axis: "Frontend", score: 75 },
-        { axis: "Data Visualization", score: 90 },
-        { axis: "Dev Ops", score: 70 },
-        
+        { axis: "Cloud", score: 75 },
+        { axis: "MLOps", score: 70 },
+        { axis: "Others", score: 60 },
       ],
     },
   },
   experience: [
     {
-      role: "Graduate Student Assistant",
-      org: "DePaul University",
+      role: "Full-Stack Data Science Intern",
+      org: "Illuminating Impact",
       location: "Chicago, USA",
-      start: "Feb 2025",
+      start: "Jan 2026",
       end: "Present",
       bullets: [
-        "Built a PostgreSQL-backed pipeline that unifies soil health, yield, and volunteer metrics from Chicago community farms.",
-        "Designed a React insight portal that spotlights crop health and grant readiness indicators for partner organizations.",
-        "Authored data contracts and ingestion workflows so researchers share consistent preprocessing metadata.",
-        "Automated anomaly checks that flag data quality risks before they reach analysis notebooks.",
-        "Facilitated cross-lab syncs that translate research hypotheses into analytics dashboards and narrative briefs.",
+        "Perform market analysis on the existing case management platform to identify product and AI opportunities.",
+        "Review production code, push fixes, and improve reliability across full-stack application workflows.",
+        "Build AI architecture for platform features that combine research, product discovery, and implementation planning.",
       ],
-      tags: ["React", "PostgreSQL", "Data Engineering", "Visualization"],
+      tags: ["Full Stack", "AI Architecture", "Market Analysis", "Product"],
     },
     {
-      role: "Research Assistant",
+      role: "Research Assistant -- ADHD Assessment",
       org: "DePaul University",
       location: "Chicago, USA",
       start: "Mar 2025",
       end: "Present",
       bullets: [
-        "Engineered interpretable ML models that surface gender-specific attention markers from clinical assessments.",
-        "Balanced diagnostic accuracy with fairness constraints, improving sensitivity for underrepresented cohorts by 14%.",
-        "Translated SHAP-style explanations into clinician-friendly narratives that support individualized interventions.",
-        "Ran collaborative review sessions with psychologists to align model outputs with qualitative observations.",
-        "Drafted an evaluation rubric that keeps future model iterations auditable and bias-aware.",
+        "Perform in-depth statistical analysis on ADHD assessment data to uncover behavioral patterns across genders.",
+        "Apply machine learning techniques to build interpretable models for predicting ADHD diagnosis and gender.",
+        "Explore gender-specific variations in ADHD indicators, contributing to more personalized assessment strategies.",
       ],
       tags: ["Explainable AI", "Statistics", "Python", "Healthcare"],
     },
     {
-      role: "Research Assistant",
+      role: "Research Assistant -- AI Immigration Tools",
       org: "DePaul University",
       location: "Chicago, USA",
       start: "Apr 2025",
       end: "Present",
       bullets: [
-        "Mapped 30+ immigration journey pain points to scope AI assistant jobs-to-be-done.",
-        "Curated multilingual corpora and speech datasets to fine-tune LLM agents for translation and triage.",
-        "Architected a speech-to-decision workflow chaining ASR, translation, and policy recommendation services.",
-        "Defined privacy guardrails and fallback flows for sensitive immigration use cases.",
-        "Produced product briefs that connect market research insights to roadmap experiments.",
+        "Conduct market research on AI-powered tools supporting immigration services.",
+        "Identify relevant datasets for fine-tuning LLMs for multilingual immigrant support.",
+        "Design system architecture for an AI assistant capable of speech recognition, translation, and personalized recommendations.",
       ],
-      tags: ["LLMs", "Product Discovery", "Architecture", "Chatbots", "TTS/STT", "Knowledge Graphs"],
+      tags: ["LLMs", "Architecture", "TTS/STT", "Speech Recognition"],
+    },
+    {
+      role: "Graduate Student Assistant",
+      org: "DePaul University",
+      location: "Chicago, USA",
+      start: "Feb 2025",
+      end: "Jun 2025",
+      bullets: [
+        "Conducted data analysis on Chicago food farms to support research on local food systems.",
+        "Designed and implemented database architecture for efficient storage and management of preprocessed farm data.",
+        "Designed a React dashboard for viewing farm data and partner-facing analysis outputs.",
+        "Collaborated with fellow research assistants to ensure data quality and consistency for downstream analysis.",
+      ],
+      tags: ["React", "PostgreSQL", "Data Engineering", "Visualization"],
     },
     {
       role: "Associate Data Scientist",
-      org: "App Virality (Outplay)",
+      org: "App Virality Technologies Pvt Ltd (Outplay)",
       location: "Hyderabad, India",
       start: "Jun 2022",
       end: "May 2024",
       bullets: [
-        "Launched an objection handling copilot that classifies prospect objections at 95% accuracy and recommends rebuttals in real time.",
-        "Deployed a phone-verified contact engine blending LLM call scripts, TTS, and CRM webhooks to lift connect rate by 120%.",
-        "Analyzed calls data and system usage to re model the systems that resulted in a 97% reduction in errors and a 3× cost reduction in PVL.",
-        "Productized a generative email writer that boosted positive replies by 80% while reducing SDR composition time by 90%.",
-        "Designed an AI Sales Agent architecture, automating key workflows to increase the sales outcomes.",
-        "Led multiple projects, independently managing the development process from concept to delivery.",
-        "Collaborated with cross-functional teams for the integration and deployment of AI tools.",
-        "Authored technical blog posts to educate users about company tools, increasing customer engagement.",
-        "Recognized as “Top Performer of the Month” for consistently delivering high-impact solutions.",
-        "Expanded technical skills in startup environment by contributing in multiple domains, advancing to a full-stack data scientist role.",
+        "Developed multiple AI tools using LLMs and automation, leading to 80% improvement in email outreach.",
+        "Troubleshot API and system errors, optimizing code to reduce errors by 90% and cut costs 3x.",
+        "Designed an AI Sales Agent architecture, automating key workflows to increase sales outcomes.",
+        "Built an objection handler using NER models to identify objections in sales emails with 95% accuracy.",
+        "Collaborated with cross-functional teams to integrate, deploy, and monitor AI tools across the product stack.",
+        "Led multiple projects independently, managing the development process from concept to delivery.",
+        "Mentored new team members during onboarding and conducted knowledge transfer sessions.",
+        "Recognized as Top Performer of the Month for consistently delivering high-impact solutions.",
       ],
-      tags: ["LLMs", "PSQL", "Full Stack", "MLOps", "AI/ML", "Python", "STT/TTS"],
+      tags: ["LLMs", "PostgreSQL", "Full Stack", "MLOps", "AI/ML", "Python"],
     },
     {
       role: "Software Engineer Intern",
-      org: "App Virality (Outplay)",
+      org: "App Virality Technologies Pvt Ltd (Outplay)",
       location: "Hyderabad, India",
       start: "Jan 2022",
       end: "May 2022",
       bullets: [
-        "Researched state-of-the-art conversational AI models and evaluated vendor APIs across latency, accuracy, and compliance.",
-        "Curated and quality-controlled proprietary datasets that accelerated deployment readiness of production AI features.",
-        "Documented cross-team ML operations playbooks adopted by engineering, product, and customer success teams.",
-        "Presented iteration reviews that clarified risks, dependencies, and experiment outcomes for leadership.",
+        "Researched state-of-the-art AI models to integrate AI capabilities into company sales tools.",
+        "Prepared and analysed datasets, implementing quality checks for production AI features.",
+        "Maintained detailed documentation for projects across engineering and product teams.",
       ],
       tags: ["NLP", "Data Ops", "Documentation"],
     },
@@ -279,31 +291,23 @@ export const siteContent: SiteContent = {
       location: "Chicago, USA",
       start: "Sep 2024",
       end: "Aug 2026",
-      gpa: "4.0 / 4.0",
+      gpa: "3.93 / 4.0",
     },
     {
       degree: "B.Tech Electronics & Communication Engineering",
-      school: "RGUKT Basar",
-      location: "Telangana, India",
+      school: "Rajiv Gandhi University of Knowledge Technologies",
+      location: "Basar, India",
       start: "Aug 2018",
       end: "May 2022",
       gpa: "8.17 / 10",
     },
     {
-      degree: "PUC — Maths, Physics, Chemistry",
-      school: "RGUKT Basar",
-      location: "Telangana, India",
+      degree: "Pre University Course",
+      school: "Rajiv Gandhi University of Knowledge Technologies",
+      location: "Basar, India",
       start: "Jul 2016",
       end: "May 2018",
       gpa: "8.99 / 10",
-    },
-    {
-      degree: "High School",
-      school: "Pudami School",
-      location: "Yacharam, Telangana, India",
-      start: "Jun 2010",
-      end: "May 2016",
-      gpa: "10 / 10",
     },
   ],
   activities: [
@@ -327,7 +331,7 @@ export const siteContent: SiteContent = {
     },
     {
       section: "Awards",
-      title: "Top Performer — Outplay",
+      title: "Top Performer -- Outplay",
       date: "2023",
       bullets: ["Recognized for leading adoption of AI-first sales tooling across go-to-market teams."],
     },
@@ -339,7 +343,7 @@ export const siteContent: SiteContent = {
     {
       section: "Awards",
       title: "School Academic Rank #1",
-      date: "2012 — 2016",
+      date: "2012 -- 2016",
     },
     {
       section: "Extracurricular",
@@ -359,25 +363,35 @@ export const siteContent: SiteContent = {
     {
       section: "Extracurricular",
       title: "School People Leader",
-      date: "2014 — 2015",
+      date: "2014 -- 2015",
       bullets: ["Represented student voice, orchestrated cultural festivals, and coordinated alumni outreach."],
     },
     {
       section: "Extracurricular",
       title: "Sports Captain",
-      date: "2012 — 2021",
+      date: "2012 -- 2021",
       bullets: ["Captained handball, football, and table tennis squads while mentoring junior athletes."],
     },
     {
       section: "Extracurricular",
       title: "Peer Mentor",
-      date: "2018 — 2021",
+      date: "2018 -- 2021",
       bullets: ["Guided juniors on career paths and emerging tech via seminars, workshops, and office hours."],
     },
     {
       section: "Hackathons",
       title: "Campus Innovation Sprint",
       bullets: ["Built IoT prototypes combining sensor networks with predictive maintenance dashboards."],
+    },
+    {
+      section: "Certifications",
+      title: "Machine Learning with Python",
+      bullets: ["Coursera"],
+    },
+    {
+      section: "Certifications",
+      title: "Neural Networks and Deep Learning",
+      bullets: ["DeepLearning.AI"],
     },
   ],
   projects: [
@@ -397,13 +411,11 @@ export const siteContent: SiteContent = {
             "Defined dual autopilot and co-pilot modes to balance automation with human approvals.",
           ],
           description: [
-            "Sales Development Representatives (SDRs) spend considerable time on routine tasks: sourcing qualified leads, drafting personalized emails, scheduling follow-ups, and handling objections. While Outplay’s platform already provided standalone tools—Lead Generator, Sequence Generator, Magic Mail (email writer), Objection Handler, and calendar integration—these modules were siloed and required manual orchestration. The challenge was to create a unified system that could leverage these components to automatically mimic an SDR’s workflow, freeing them to focus on high-value activities.",
+            "Outplay's platform offered standalone tools -- Lead Generator, Sequence Generator, Magic Mail, Objection Handler, and calendar integration -- but they were siloed and required manual orchestration. The AI Sales Agent unified these modules into a single autonomous pipeline.",
             "",
-            "The AI Sales Agent initiative reimagined the sales process as a fully automated pipeline. SDRs would begin by choosing an agent profile—such as an agent specialized in engaging executives at start-up companies. The system would then use the Lead Generator to identify qualified prospects based on historical data and predefined criteria. Once a list of leads was generated, the Sequence Generator would craft a personalized outreach plan for each prospect, incorporating both timing and messaging across multiple channels (emails, calls, LinkedIn, etc.). Next, the Magic Mail component would generate the actual email content—both initial outreach and replies—while the Objection Handler would manage and respond to prospect objections with appropriate context.",
+            "SDRs select an agent profile (e.g., targeting startup executives). The agent then sources qualified leads, crafts multi-channel outreach sequences, generates personalized email content, handles objections, and continuously follows up until a meeting is booked. Prospects are bucketed by response type (no reply, objection, not interested), with each bucket triggering a tailored workflow.",
             "",
-            "The final objective of the agent was to schedule a meeting. To achieve this, the agent continuously executed the sequence until a booking was secured, automatically sending follow-ups and updating the prospect’s status. Prospects were sorted into buckets such as follow-up executives, no response, not interested, or budget issues. Each bucket triggered a different agent workflow with customized sequences aimed at nudging the prospect toward a meeting. The architecture also defined two modes of operation: Autopilot, where the AI agent handled everything from lead sourcing to meeting booking without human intervention, and Co-pilot, where the agent executed each step but waited for SDR approval before proceeding. This dual-mode design ensured flexibility, allowing SDRs to maintain control or hand off the process entirely depending on their preferences.",
-            "",
-            "Although the full implementation was not completed before departing for graduate studies, the project delivered a comprehensive architectural blueprint that outlined data flows, module interactions, error handling, and scalability considerations. It laid the groundwork for a future where AI-driven agents could handle SDR tasks end-to-end, promising to dramatically increase efficiency and consistency in sales outreach while ensuring personalization and compliance with each company’s unique policies.",
+            "The architecture supports two modes: Autopilot (fully autonomous, end-to-end) and Co-pilot (agent executes each step but awaits SDR approval). The project delivered a comprehensive architectural blueprint covering data flows, module interactions, error handling, and scalability -- laying the groundwork for fully AI-driven SDR operations.",
           ].join("\n"),
           cardKeywords: ["Multi-agent AI", "Sales Automation", "Architecture Design"],
           keywords: [
@@ -420,55 +432,6 @@ export const siteContent: SiteContent = {
           website: "https://outplay.ai/SDR-agent",
           relevantSlugs: ["magic-mail", "sequence-generator"],
         },
-        // {
-        //   slug: "sureconnect-phone-verified-leads",
-        //   title: "SureConnect",
-        //   timeframe: "2023 — 2024",
-        //   tagline: "LLM-powered phone verification",
-        //   summary:
-        //     "Built an AI calling agent that verifies lead contact data across telephony providers, keeping sales pipelines accurate and responsive.",
-        //   achievements: [
-        //     "Reduced verification costs 3× and accelerated processing 5× by refactoring call orchestration.",
-        //     "Lifted contact validation accuracy from 88% to 94% through error log analytics and architecture cleanup.",
-        //   ],
-        //   description: [
-        //     "In sales-driven organizations, time is critical. Sales Development Representatives (SDRs) spend significant time verifying lead contact details, but unreliable information leads to wasted calls, voicemails, or unanswered attempts. This inefficiency takes valuable time away from high-priority tasks, like engaging genuine prospects, and contributes to missed opportunities in the sales pipeline. The challenge was to create a scalable, cost-effective solution that allowed SDRs to focus more on closing deals and less on administrative work.",
-        //     "",
-        //     "SureConnect was developed to automate the phone verification process using AI-powered calling agents. The system aimed to streamline the validation of lead contact details through automated conversations, utilizing Text-to-Speech (TTS), Speech-to-Text (STT), and chatbot technologies. However, early deployment revealed several bottlenecks: the system was slow, error-prone, and costly due to its reliance on Twilio, hindering its scalability and performance.",
-        //     "",
-        //     "To resolve these issues, a review of alternative calling providers led to the adoption of Plivo and Telnyx, which were 60% cheaper than Twilio. Additionally, it was found that the TTS process consumed over 50% of system resources, with 95% of calls not needing the assistant to speak once the lead's name was identified. Based on these insights, the TTS module was removed for most calls, significantly improving system efficiency by reducing both time and resource consumption.",
-        //     "",
-        //     "The architecture was further optimized by modularizing the system, separating the caller API, TTS, transcription, chatbot, and AI helpers into individual components. This not only enhanced flexibility and scalability but also simplified maintenance. A new CallerManager module was introduced, seamlessly integrating multiple APIs (Twilio, Plivo, Telnyx), enabling easy switching between providers.",
-        //     "",
-        //     "In addition to backend improvements, I also led the development of the SureConnect website from start to finish. Developed using React, the website provided users with an intuitive interface to monitor calls, view results, and interact with the system, ensuring a seamless experience for both clients and internal users.",
-        //     "",
-        //     "These optimizations resulted in substantial improvements: call duration dropped from 45 seconds to 15 seconds, making the system 5 times faster and 3 times cheaper. Error rates decreased by 97%, while the accuracy of lead validation increased from 88% to 94%. These improvements not only reduced operational costs but also significantly boosted the efficiency of the lead verification process by 120%. For my contributions, I was recognized as the best employee of the month, showcasing how thoughtful design and continuous optimization can transform a system into a high-performing, cost-effective solution.",
-        //   ].join("\n"),
-        //   cardKeywords: ["Chatbot", "Multimodal modelling", "Sales Automation"],
-        //   keywords: [
-        //     "Lead Verification",
-        //     "Speech-to-Text",
-        //     "Text-to-Speech",
-        //     "Speech Models",
-        //     "Chatbot",
-        //     "API Development",
-        //     "Web Development",
-        //     "SQL",
-        //     "Twilio",
-        //     "Plivo",
-        //     "Telnyx",
-        //     "FastAPI",
-        //     "AWS",
-        //     "Error Analysis",
-        //     "System Architecture",
-        //     "Multimodal Modelling",
-        //     "Huggingface",
-        //     "Transformers",
-        //     "Python"
-        //   ],
-        //   website: "http://sureconnect.ai",
-        //   relevantSlugs: ["ai-sales-agent", "objection-handling-copilot", "sequence-generator"],
-        // },
         {
           slug: "magic-mail",
           title: "Magic Mail",
@@ -481,29 +444,22 @@ export const siteContent: SiteContent = {
             "Boosted positive reply rates by 80% across 40 pilot customers.",
           ],
           description: [
-            "Sales Development Representatives (SDRs) spend a significant amount of time crafting personalized emails to engage with prospects. However, this process is both time-consuming and requires creativity, as many SDRs struggle to effectively incorporate key prospect details or tackle objections raised by prospects. This inefficiency often results in wasted time and missed opportunities. The need for a solution that could help SDRs quickly generate personalized, creative, and engaging emails became apparent.",
+            "SDRs struggle to write personalized, prospect-aware emails at scale. Magic Mail automates this by generating tailored outreach and objection responses using fine-tuned LLMs.",
             "",
-            "Magic Mail was developed to automate the email drafting process using generative AI. The solution aimed to write highly personalized emails that took into account the details of each prospect, helping SDRs save time while increasing the likelihood of a response. The system was also designed to craft responses to objections, enabling SDRs to address concerns and maintain the conversation flow without manually drafting each reply.",
+            "I analyzed existing high-performing sales emails to identify effective structures, personalization patterns, and objection-handling strategies. These insights guided prompt engineering experiments and the curation of a fine-tuning dataset covering prospect details, industry context, and common objections.",
             "",
-            "To build the system, a comprehensive analysis was conducted on existing sales emails written by SDRs. This analysis provided insights into the most effective strategies, personalized lines, and common objections. Additionally, research was done to identify the best email structures for maximizing response rates. With these insights in hand, experiments were conducted using Large Language Models (LLMs) to generate emails with varying prompt structures to find the best approach for high-quality, engaging content.",
-            "",
-            "A diverse dataset of prospect details and email exchanges was then curated to fine-tune the AI model. The model was trained to generate personalized emails by considering each prospect's specific information, such as their industry, previous interactions, and unique needs. Similarly, a dataset of common objections and responses was used to train the system to generate effective replies that tackled prospects' concerns. The final model, fine-tuned and continuously improved, provided results that surpassed existing models, giving SDRs an effective tool to engage with prospects efficiently.",
-            "",
-            "Magic Mail successfully reduced the time spent by SDRs on drafting emails by 250% while also improving the email outreach by 80%. By automating the process of email creation and response handling, SDRs were able to focus on more strategic tasks, like relationship-building, and significantly improve their outreach efforts. The system continuously evolved, incorporating feedback and industry best practices to create a tool that adapted to changing needs and maximized effectiveness for sales teams.",
+            "The fine-tuned model generates both initial outreach and contextual replies. Magic Mail reduced email composition time by 250% and improved positive reply rates by 80% across pilot customers, freeing SDRs to focus on relationship-building.",
           ].join("\n"),
-          cardKeywords: ["Generative AI", "Sales Automation", "Prompt Engineering"],
+          cardKeywords: ["Generative AI", "Sales Automation", "LLM Fine-Tuning"],
           keywords: [
             "Email Personalization",
             "Prompt Engineering",
             "Generative AI",
-            "Sales Enablement",
-            "Sales Copywriting",
-            "Knowledge Bases",
             "LLM Fine-Tuning",
-            "Workflow Automation",
-            "Fast API",
-            "Postgre SQL",
-            "Python"
+            "Sales Enablement",
+            "FastAPI",
+            "PostgreSQL",
+            "Python",
           ],
           website: "https://outplay.ai/ai-for-sales",
           relevantSlugs: ["sequence-generator", "ai-sales-agent", "objection-handling-copilot"],
@@ -511,7 +467,7 @@ export const siteContent: SiteContent = {
         {
           slug: "objection-handling-copilot",
           title: "Objection Handling",
-          timeframe: "2022 — 2023",
+          timeframe: "2022 -- 2023",
           tagline: "Real-time rebuttals for sales objections",
           summary:
             "Delivered a copilot that classifies objections in sales conversations and surfaces context-aware rebuttals.",
@@ -520,29 +476,54 @@ export const siteContent: SiteContent = {
             "Linked rebuttal playbooks to deal stage, persona, and sentiment cues.",
           ],
           description: [
-            "Sales Development Representatives (SDRs) face significant challenges in identifying objections like budget, timing, competitor, authority, and information in prospect emails. Manually reading through emails to pinpoint these objections can be time-consuming, leading to inefficiencies and delayed responses. The goal was to build a system that automatically detects objections, allowing SDRs to prioritize their time and engage with the most promising leads.",
+            "SDRs manually scan prospect emails to identify objections (budget, timing, competitor, authority) -- a slow process that delays responses. This tool automates objection detection using Named Entity Recognition (NER).",
             "",
-            "The solution was built using Named Entity Recognition (NER), a powerful NLP technique to detect and categorize objections in emails. A diverse dataset of prospect emails was created, with each email labeled based on the type of objection it contained. Label Studio was used for efficient data annotation, ensuring that the emails were accurately labeled with the corresponding objections. Once the dataset was prepared, the SPACY framework was used to fine-tune a base model for objection detection. Multiple versions of the model were tested to optimize performance, and the best version was selected, achieving a 95% model accuracy.",
+            "I created a labeled dataset of prospect emails using Label Studio, then fine-tuned a spaCy NER model through multiple iterations to reach 95% accuracy. An API integrates the model with existing sales tools, automatically categorizing emails into interested, objection, and not interested buckets.",
             "",
-            "To improve the SDR workflow, an API was developed to integrate the objection-detection system with existing sales tools. This API allowed SDRs to easily filter emails based on the prospect’s interest or objections, enabling them to focus on high-priority emails. The system automatically categorized emails into interested, objections, and not interested buckets, allowing SDRs to prioritize responses efficiently and reduce time spent on unresponsive leads.",
-            "",
-            "The final solution enabled SDRs to automatically detect objections, significantly reducing the time spent manually reading and sorting emails. By streamlining the objection-handling process, the system helped SDRs respond faster, prioritize more effectively, and ultimately improve their productivity and sales performance.",
+            "The system enables SDRs to prioritize high-value prospects instantly, respond to objections faster, and spend less time on manual email triage.",
           ].join("\n"),
-          cardKeywords: ["NER", "Huggingface", "NLP", "spaCy"],
+          cardKeywords: ["NER", "spaCy", "NLP"],
           keywords: [
             "Objection Classification",
-            "Named Entity Recognition (NER)",
-            "Sales Coaching",
-            "Enablement Playbooks",
-            "Conversation Intelligence",
-            "Huggingface",
+            "Named Entity Recognition",
             "spaCy",
-            "Fast API",
-            "Postgre SQL",
-            "Python"
+            "Huggingface",
+            "FastAPI",
+            "PostgreSQL",
+            "Python",
           ],
           website: "https://outplay.ai/ai-for-sales",
           relevantSlugs: ["magic-mail", "sequence-generator"],
+        },
+        {
+          slug: "sales-playbook",
+          title: "Sales Playbook",
+          timeframe: "2022 - 2024",
+          tagline: "Automated objection handling playbooks",
+          summary:
+            "Designed a playbook system using NLP to match prospect objections with the best handling messages and auto-generate playbooks for new users.",
+          achievements: [
+            "Used NLP techniques to match objections with optimal handling messages, increasing response rates.",
+            "Created a workflow to auto-generate personalized playbooks from onboarding details.",
+          ],
+          description: [
+            "Sales playbooks are collections of handling messages to address objections raised by prospects. Designed the playbook using NLP techniques to identify the best matching handling message for each objection, leading to increased response rates.",
+            "",
+            "Created a workflow to automatically create a sales playbook for each new user by extracting the handling messages from the onboarding details provided by the user.",
+            "",
+            "The system reduced the time SDRs spend crafting responses and ensured consistent, high-quality objection handling across the team.",
+          ].join("\n"),
+          cardKeywords: ["NLP", "Python", "Data Analysis"],
+          keywords: [
+            "NLP",
+            "Sales Coaching",
+            "Playbooks",
+            "Python",
+            "Data Analysis",
+            "Workflow Automation",
+          ],
+          website: "https://outplay.ai/ai-for-sales",
+          relevantSlugs: ["objection-handling-copilot", "magic-mail", "sequence-generator"],
         },
         {
           slug: "sequence-generator",
@@ -556,17 +537,13 @@ export const siteContent: SiteContent = {
             "Streamed each step to the UI as soon as it was ready so SDRs could review progressively.",
           ],
           description: [
-            "Sales Development Representatives (SDRs) face a common challenge in creating personalized sales sequences. These sequences typically involve 6 to 10 steps and need to be tailored to various factors such as industry, company type, and prospect details. Creating these sequences manually takes a significant amount of time, often leading to the use of unpersonalized, generic sequences. This reduces engagement and effectiveness. The need was to automate and speed up the process, enabling SDRs to create personalized sequences quickly while still maintaining high quality.",
+            "Creating multi-step sales sequences manually takes hours and often produces generic, unpersonalized outreach. The Sequence Generator automates this using generative AI, producing tailored 6-10 step sequences in minutes from product details and prospect information.",
             "",
-            "The Sequence Generator was designed to address these pain points by automating the creation of personalized sales sequences. Using inputs like product details, sales points, and prospect information, the system generates optimized sequences in just a few minutes, compared to the hours typically required for manual creation. Generative AI was used to design the sequence steps and generate content, making the sequence both effective and personalized for the prospect.",
+            "Sequence data is stored in MongoDB for flexibility. A key UX challenge was the ~50 second generation time: I implemented progressive streaming so each step appears as it is ready, letting SDRs review incrementally. Individual steps can also be regenerated with additional context, avoiding full-sequence rework.",
             "",
-            "A significant part of the development was focused on the API development and database architecture. The unstructured data related to sequences and prospects was stored in MongoDB, allowing flexible and scalable storage. The system also addressed a key user experience issue: AI-generated sequences took around 50 seconds to complete. To avoid keeping the user waiting, the system was enhanced to send each step's content as soon as it was ready, allowing the SDR to review and approve steps progressively rather than waiting for the entire sequence to finish.",
-            "",
-            "Another pain point identified was that AI-generated sequences could sometimes be near perfect, except for one step. If the entire sequence had to be regenerated due to one suboptimal step, it would be inefficient. To solve this, a feature was added to allow re-generation of individual steps, based on additional context provided by the SDR on what to improve. This made the process more logical, efficient, and reliable, saving time and preventing unnecessary rework.",
-            "",
-            "The Sequence Generator provided flexibility, speed, and precision, helping SDRs create high-quality, personalized sequences much faster. With the ability to experiment with different types of outreach (emails, calls, LinkedIn messages) and dynamically add or adjust steps, the tool significantly enhanced productivity and improved the overall efficiency of the sales outreach process.",
+            "The tool reduced sequence creation time by 90% and supports multi-channel outreach (email, calls, LinkedIn) with dynamic step adjustment.",
           ].join("\n"),
-          cardKeywords: ["Generative AI", "MongoDB", "Fast API"],
+          cardKeywords: ["Generative AI", "MongoDB", "FastAPI"],
           keywords: [
             "Outreach Automation",
             "Generative AI",
@@ -591,20 +568,20 @@ export const siteContent: SiteContent = {
         {
           slug: "adhd-gender-prediction",
           title: "ADHD & Gender Prediction",
-          timeframe: "2024",
-          tagline: "Interpretable neurodiversity insights",
+          timeframe: "2025",
+          tagline: "Interpretable clinical ML",
           summary:
-            "Modeled ADHD diagnosis indicators with fairness-aware pipelines that keep clinicians in the loop.",
+            "Built multi-output classification models to predict ADHD diagnosis and participant gender from behavioral assessment data.",
           achievements: [
-            "Engineered features from psychometric surveys, cognitive scores, and behavioral logs.",
-            "Benchmarked logistic regression, kNN, and XGBoost with explainability overlays clinicians trust.",
+            "Benchmarked Logistic Regression, kNN, and XGBoost with feature engineering and evaluation techniques.",
+            "Applied SHAP-style explanations to make model outputs interpretable for clinical researchers.",
           ],
           description: [
-            "Clinicians needed gender-aware ADHD insights that remained transparent and defensible while still delivering strong predictive performance. The project focused on building a pipeline that could surface attention markers by gender without sacrificing interpretability.",
+            "Analysed ADHD assessment data to identify behavioural patterns across male and female participants. Built multi-output classification models (Logistic Regression, kNN, XGBoost) to predict both ADHD diagnosis and participant gender.",
             "",
-            "I engineered features from psychometric surveys, cognitive assessments, and behavioral logs, then experimented with models ranging from logistic regression to XGBoost. Each iteration paired accuracy benchmarks with fairness audits so cohort-level sensitivity stayed balanced. SHAP-style explanations were translated into clinician-friendly narratives, ensuring results could be discussed in the context of real patient experiences.",
+            "Applied feature engineering, model tuning, and evaluation techniques to improve model explainability and performance. SHAP-style attributions were translated into clinician-friendly narratives for individualized interventions.",
             "",
-            "The resulting workflow achieved a 0.82 F1 score while raising sensitivity for underrepresented gender cohorts by 14%. Comprehensive documentation, evaluation rubrics, and bias reviews created a repeatable path for future IRB approvals and kept clinical partners confident in how the model evolved.",
+            "The project contributed to research on gender-based differences in ADHD for more targeted assessment approaches, achieving a 0.82 F1 score while improving sensitivity for underrepresented cohorts by 14%.",
           ].join("\n"),
           cardKeywords: ["Clinical Analytics", "Interpretable ML", "Python"],
           keywords: [
@@ -620,28 +597,22 @@ export const siteContent: SiteContent = {
         {
           slug: "gesture-prediction",
           title: "Gesture Prediction",
-          timeframe: "2024",
-          tagline: "sEMG-driven assistive models",
+          timeframe: "2025",
+          tagline: "sEMG-driven hand gesture classification",
           summary:
-            "Classified muscle signals using ensemble models to power responsive assistive wearables.",
+            "Analyzed time series sEMG data and developed deep learning and ensemble models to predict 10 hand gestures.",
           achievements: [
-            "Processed raw biosignals with frequency-domain filtering and window engineering.",
-            "Benchmarked ensemble models, landing on XGBoost with 82.6% accuracy.",
+            "Extracted 96 time- and frequency-domain features per segment from raw biosignals.",
+            "Achieved 82% multi-class average accuracy using XGBoost.",
           ],
           description: [
-            "Surface electromyography (sEMG) signals capture muscle activity and power prosthetics, rehabilitation programs, and human-computer interaction systems. Yet the signals are noisy and highly variable across participants, making gesture classification difficult. This course project tackled that challenge by building an end-to-end pipeline to recognize hand and wrist gestures from raw sEMG recordings.",
+            "Surface electromyography (sEMG) signals are noisy and highly variable across participants, making gesture classification difficult. This project built an end-to-end pipeline from raw sEMG recordings to gesture predictions.",
             "",
-            "The work began by sourcing a multi-subject dataset in which forty participants performed ten gestures plus a rest state, with four forearm electrodes sampled at 2 kHz. I applied a sixth-order Butterworth bandpass filter (5-500 Hz) and a notch filter at 50 Hz to suppress interference, then segmented the signals into 250 ms windows with 50% overlap to preserve temporal dynamics.",
+            "From a 40-participant dataset (10 gestures, 4 forearm electrodes at 2 kHz), I applied Butterworth bandpass and notch filters, segmented signals into 250ms overlapping windows, and extracted 24 features per channel (MAV, RMS, spectral power, entropy, Hjorth parameters, etc.).",
             "",
-            "Feature extraction was comprehensive: twenty-four time- and frequency-domain metrics per channel—mean absolute value, RMS, variance, zero crossings, spectral power, mean and median frequency, entropy, Hjorth parameters, and more—yielded 96 features per segment. Exploratory analysis and correlation studies guided transformations to reduce skew and temper outliers.",
-            "",
-            "To avoid overfitting, I pruned highly correlated features, evaluated ensemble feature importances, and used backward elimination to isolate the most discriminative signals. The dataset split participants between training and test sets to prevent leakage, retaining generalization across unseen subjects.",
-            "",
-            "Multiple classifiers—Decision Trees, Random Forests, XGBoost, and Support Vector Machines—were tuned via grid search with accuracy, precision, recall, and F1-score benchmarks. XGBoost achieved 82.6% multi-class accuracy, outperforming Random Forests (70.6%) and Decision Trees (65.3%), while a dedicated rest-versus-activity classifier reached roughly 90% accuracy.",
-            "",
-            "The result is a reproducible sEMG analytics workflow that pairs robust preprocessing with ensemble learning to deliver reliable intent detection for assistive wearables. The notebooks document calibration guidance and evaluation dashboards so future teams can extend the models or port them to embedded hardware.",
+            "After feature selection via correlation pruning and backward elimination, I benchmarked Decision Trees, Random Forests, XGBoost, and SVMs. XGBoost achieved 82.6% multi-class accuracy, with a dedicated rest-vs-activity classifier reaching ~90%.",
           ].join("\n"),
-          cardKeywords: ["Signal Procesing", "Time-Series ML", "Data Analysis"],
+          cardKeywords: ["Signal Processing", "Time-Series ML", "Feature Engineering"],
           keywords: [
             "Signal Processing",
             "Feature Engineering",
@@ -657,22 +628,20 @@ export const siteContent: SiteContent = {
         {
           slug: "galaxy-type-classification",
           title: "Galaxy Type Classification",
-          timeframe: "2022",
-          tagline: "Transfer learning for astronomy",
+          timeframe: "2024",
+          tagline: "Multi-class astronomical classification",
           summary:
-            "Adapted machine learning algorithms to classify galaxy types based on shape and roatation",
+            "Developed predictive models for multi-class galaxy classification using regression techniques.",
           achievements: [
-            "Trained multinomial logistic regression model to reach 88.7% macro accuracy.",
-            "Manually created the multinomial logistic regression model using logistic regression base models.",
+            "Achieved 88.78% accuracy with a multinomial logistic regression model.",
+            "Manually built multinomial regression from individual logistic regression base models to validate the approach.",
           ],
           description: [
-            "Analyzed the galaxy types dataset to identify the properties that decide the type of galaxy. The types were classified into Spiral, Elliptical and Uncertain.",
+            "Analyzed galaxy shape data to classify galaxies into Spiral, Elliptical, and Uncertain types. The project explored using regression models for multi-class classification.",
             "",
-            "The course project needed us to try using regression models for classification. Since this is a multi class classification, we had to use multinomial logistic regression model. ",
+            "Built individual logistic regression models for each class and combined them using the argmax function to construct a multinomial regression model from scratch. Compared this manual approach against sklearn's built-in multinomial logistic regression.",
             "",
-            "Out of curiosity, we have created the logistic regression model for each shape and then combined all three models using arg max function to create the mulltinomial regression model.",
-            "",
-            "We have found that the sensitivity, specificity and accuracy of both models came out to be the same proving that logistic regression models are base for multinomial regression model."
+            "Both approaches produced identical sensitivity, specificity, and accuracy metrics (88.78%), confirming that logistic regression models serve as the mathematical foundation for multinomial regression.",
           ].join("\n"),
           cardKeywords: ["Regression", "Visualization", "Analytics"],
           keywords: [
@@ -689,20 +658,20 @@ export const siteContent: SiteContent = {
         {
           slug: "phishing-website-detection",
           title: "Phishing Website Detection",
-          timeframe: "2021",
-          tagline: "URL intelligence for cybersecurity",
+          timeframe: "2022",
+          tagline: "ML-powered URL classification",
           summary:
-            "Merged disparate phishing datasets and built machine learning models for real-time URL classification.",
+            "Developed a phishing website detection tool using ML classifiers to check if a given website URL is legitimate.",
           achievements: [
-            "Engineered 30+ URL-based features by synthesizing two public datasets.",
-            "Trained Random Forest and KNN models achieving 97% and 92% accuracy respectively.",
+            "Achieved 97% accuracy with Random Forest and 92% with KNN.",
+            "Built a Flask web app for real-time URL legitimacy predictions.",
           ],
           description: [
-            "Phishing attacks remain a pervasive security threat, exploiting unwary users by mimicking legitimate websites to steal sensitive information. This academic project set out to build a machine learning model that could classify phishing sites based solely on URL-derived features, reducing reliance on manual rules or user training.",
+            "Phishing attacks exploit users by mimicking legitimate websites. This project built ML classifiers to detect phishing URLs based on engineered features.",
             "",
-            "Two public phishing datasets were combined by manually extracting missing attributes with URL heuristics and DNS lookups. After preprocessing and encoding, multiple algorithms were evaluated—Random Forest, Decision Tree, XGBoost, and KNN—to identify the most reliable classifier. Random Forest delivered the strongest performance at 97% accuracy, with KNN close behind at 92%.",
+            "Combined two public phishing datasets, manually extracted missing attributes using URL heuristics and DNS lookups, and engineered 30+ features. Evaluated Random Forest, Decision Tree, XGBoost, and KNN -- Random Forest performed best at 97% accuracy.",
             "",
-            "To make the model usable, I wrapped it in a Flask web app where users could enter URLs and receive instant legitimacy predictions. The tool demonstrated how ensemble learning and thoughtful feature engineering could be packaged into an accessible cybersecurity assistant.",
+            "Wrapped the model in a Flask + HTML web app where users enter URLs and receive instant predictions, making the classifier accessible as a practical cybersecurity tool.",
           ].join("\n"),
           cardKeywords: ["Flask", "Random Forest", "Feature Extraction"],
           keywords: [
@@ -716,6 +685,35 @@ export const siteContent: SiteContent = {
             "kNN"
           ],
           relevantSlugs: ["data-viz-pro", "gesture-prediction", "galaxy-type-classification"],
+        },
+        {
+          slug: "student-sentiment-analysis",
+          title: "Student Sentiment Analysis",
+          timeframe: "2021",
+          tagline: "NLP-driven survey analysis",
+          summary:
+            "Conducted a survey of 1200 students and built a classifier model to analyze sentiments towards the university.",
+          achievements: [
+            "Surveyed 1200 students to gather sentiment data about the university.",
+            "Developed an NLP classifier to categorize student sentiments from free-text responses.",
+          ],
+          description: [
+            "Conducted a survey of 1200 students at RGUKT Basar to gather their sentiments towards the university across various aspects of campus life.",
+            "",
+            "Developed a classifier model using ML and NLP techniques to analyze and categorize student sentiments from survey responses.",
+            "",
+            "The analysis provided actionable insights into student satisfaction and areas for improvement across the university.",
+          ].join("\n"),
+          cardKeywords: ["NLP", "ML", "Data Analysis"],
+          keywords: [
+            "NLP",
+            "Sentiment Analysis",
+            "Machine Learning",
+            "Data Analysis",
+            "Survey Analysis",
+            "Python",
+          ],
+          relevantSlugs: ["adhd-gender-prediction", "phishing-website-detection", "galaxy-type-classification"],
         },
       ],
     },
@@ -735,11 +733,11 @@ export const siteContent: SiteContent = {
             "Implemented dual-panel previews so users see how preprocessing changes affect plots and tables.",
           ],
           description: [
-            "For many aspiring data scientists, diving into analysis can be overwhelming. Typical workflows demand scripting, cleaning, visualizing, and modeling—often without a clear sense of how each preprocessing step reshapes the data. Data Viz Pro was created as a no-code Streamlit studio that demystifies this journey.",
+            "A data science pipeline tool built with Streamlit that enables users to process, visualize data, and train models without writing code.",
             "",
-            "The app walks users through uploading CSV or Excel files, profiling datasets, and generating plots with Pandas, NumPy, Matplotlib, and Seaborn under the hood. Its signature experience is a side-by-side panel where the original dataset sits opposite the transformed view, so every dropped column, data type conversion, or imputed value is immediately reflected.",
+            "Users upload CSV or Excel files, profile datasets, and apply preprocessing steps with side-by-side panels showing original vs. transformed data. Every dropped column, type conversion, or imputed value is immediately visible.",
             "",
-            "When users advance to modeling, they can train scikit-learn algorithms, review train/test metrics, and download both the cleaned dataset and model artifacts. The result is an approachable yet rigorous playground that empowers classrooms and newcomers to experiment with end-to-end workflows in minutes.",
+            "After preprocessing, users can train scikit-learn models, review metrics, and download both the cleaned dataset and model artifacts along with reports. Built with Pandas, NumPy, Matplotlib, and Seaborn under the hood.",
           ].join("\n"),
           cardKeywords: ["Data Visualization", "Streamlit", "Model Ops"],
           keywords: [
@@ -766,13 +764,13 @@ export const siteContent: SiteContent = {
             "Built a call scoring model spanning tone, action items, and objection handling metrics.",
           ],
           description: [
-            "Sales organizations struggle to manually review every call and coach SDRs on follow-up execution. Conversation Intelligence tackled this by automating transcription, speaker identification, tone analysis, next-step extraction, objection detection, and call scoring.",
+            "Built an advanced tool for analysing sales calls by extracting transcription, objections, action items, tones, and SDR performance metrics.",
             "",
-            "Kafka queued post-call tasks, after which backend services generated transcripts, diarized speakers, and fed generative and rule-based pipelines to surface action items. SpeechBrain embeddings unlocked 100% speaker recognition, while objection detection models highlighted common friction points.",
+            "Utilized speech embeddings to recognize speakers in a call with 100% accuracy. Identified action items with 92% accuracy using NERs and Regex. Developed a module to measure SDR performance using advanced call scoring metrics.",
             "",
-            "The system culminated in dashboards that put call scores, module-specific metrics, and coaching cues in front of managers. By packaging detailed analytics into an accessible view, SDRs received faster feedback and operations teams gained the data needed to prioritize training.",
+            "The system surfaces call scores, coaching cues, and module-specific metrics in dashboards, giving managers and SDRs actionable feedback without manual call review.",
           ].join("\n"),
-          cardKeywords: ["Data Analytics", "Generative AI", "Multimodal modelling"],
+          cardKeywords: ["Speech Recognition", "NER", "Data Analytics"],
           keywords: [
             "Speech Recognition",
             "Speaker Identification",
@@ -802,11 +800,11 @@ export const siteContent: SiteContent = {
             "Developed bots that join meetings, capture audio/video, and push via WebSockets for live analytics.",
           ],
           description: [
-            "Sales teams needed a reliable way to capture Zoom meetings and stream them into analytics tools without manual effort. This proof of concept explored how far automation could go within Zoom’s SDK ecosystem.",
+            "Performed market research on meeting bots that join scheduled meetings to record and take notes. Created a Zoom application integrated with Python REST API to automatically record and live stream scheduled meetings.",
             "",
-            "I researched Web and Meeting SDK capabilities, prototyped bots that auto-joined sessions, started recordings, and streamed audio/video via WebSockets for live analysis. Alongside technical experiments, I evaluated competing products and identified a partner that met requirements at a lower operational cost.",
+            "Prototyped bots that auto-join sessions, start recordings, and stream audio/video via WebSockets for live analysis. Evaluated competing products and provided a build-vs-buy recommendation.",
             "",
-            "The outcome validated automation feasibility, provided leadership with a pragmatic build-vs-buy recommendation, and fed critical learnings into subsequent Conversation Intelligence initiatives.",
+            "The learnings fed directly into the Conversation Intelligence project, informing the architecture for automated call capture and analysis.",
           ].join("\n"),
           cardKeywords: ["Websockets", "Real-time Streaming", "Automation", "Prototype"],
           keywords: [
@@ -828,21 +826,21 @@ export const siteContent: SiteContent = {
       items: [
         {
           slug: "iot-sensing-projects",
-          title: "IoT Sensing Projects",
-          timeframe: "2019 — 2021",
-          tagline: "Sensor-driven insights for campus infrastructure",
+          title: "IoT Projects",
+          timeframe: "2018 - 2022",
+          tagline: "Sensor-driven embedded systems",
           summary:
-            "Delivered a suite of IoT prototypes that monitor environments, detect anomalies, and train peers on hardware best practices.",
+            "Developed multiple IoT projects as part of academics using electronics, embedded C, sensors, and Arduino.",
           achievements: [
-            "Built environmental monitors with Arduino and ESP32 nodes reporting to cloud dashboards.",
-            "Developed predictive maintenance alerts that flag anomalies before downtime.",
+            "Built temperature and humidity monitors to track growing conditions of plants.",
+            "Developed a prototype car using IR and ultrasonic sensors for obstacle avoidance.",
           ],
           description: [
-            "Campus operations teams needed affordable ways to monitor environmental conditions across labs and dorms. I led a series of IoT prototypes that combined Arduino and ESP32 hardware with  dashboards to surface real-time insights.",
+            "Developed multiple IoT projects during the bachelor's degree as part of academics and lab work. Used temperature and humidity sensors to monitor the growing conditions of a plant, and IR/ultrasonic sensors to build a prototype car that stops when faced with obstacles.",
             "",
-            "We instrumented sensors for temperature, humidity, and vibration, implemented lightweight edge analytics to flag anomalies, and built dashboards so staff could triage maintenance issues before they escalated. Documentation and workshops helped student teams replicate and extend each build.",
+            "Worked with multiple sensors, LED screens, and electronics as part of lab projects. Each project combined Arduino hardware with embedded C programming.",
             "",
-            "The initiative reduced downtime risk, equipped facilities staff with actionable telemetry, and inspired iterative student-led projects that reused the modular architecture.",
+            "These projects built a strong foundation in hardware-software integration and hands-on prototyping skills.",
           ].join("\n"),
           cardKeywords: ["Embedded Systems", "Arduino", "IoT Coaching"],
           keywords: [
@@ -864,7 +862,7 @@ export const siteContent: SiteContent = {
       slug: "llm-sales-ops-playbook",
       title: "Designing LLM-Powered Sales Operations That Actually Scale",
       summary:
-        "A framework for orchestrating multi-agent pipelines—from data hygiene to compliance—that keep revenue teams focused on conversations, not admin work.",
+        "A framework for orchestrating multi-agent pipelines--from data hygiene to compliance--that keep revenue teams focused on conversations, not admin work.",
       published: "2024-11-12",
       readingTime: "8 min read",
       tags: ["LLMs", "Sales Ops", "Automation"],
@@ -880,9 +878,9 @@ Most sales ops automations are request/response macros. They break when:
 
 ### System Blueprint
 
-1. **Data readiness** — nightly hygiene jobs score enrichment quality and push issues to Slack.
-2. **Agent routing** — lightweight policies decide which skill agent (research, sequencing, follow-up) owns the task.
-3. **Human checkpoints** — SDRs approve only the highest risk transitions (> 0.7 risk score).
+1. **Data readiness** -- nightly hygiene jobs score enrichment quality and push issues to Slack.
+2. **Agent routing** -- lightweight policies decide which skill agent (research, sequencing, follow-up) owns the task.
+3. **Human checkpoints** -- SDRs approve only the highest risk transitions (> 0.7 risk score).
 
 ### Observability Contract
 
@@ -896,7 +894,7 @@ FROM agent_execution_log
 WHERE occurred_at >= NOW() - INTERVAL '7 days';
 ~~~
 
-Keep this query paginated and charted—compliance loves it.
+Keep this query paginated and charted--compliance loves it.
 
 ### Rollout Checklist
 
@@ -920,9 +918,9 @@ When complete, the ops team becomes orchestrators, not fire-fighters.
 
 Clinicians ask: *"Can I trust this model for my patient?"* We answered by pairing metrics with narratives.
 
-1. **Transparent features** — start with psychometric scales clinicians recognize.
-2. **Fairness audits** — flag demographic skews before tuning hyper-parameters.
-3. **Narrative-ready outputs** — convert SHAP attributions into short takeaway paragraphs.
+1. **Transparent features** -- start with psychometric scales clinicians recognize.
+2. **Fairness audits** -- flag demographic skews before tuning hyper-parameters.
+3. **Narrative-ready outputs** -- convert SHAP attributions into short takeaway paragraphs.
 
 ### Model Stack
 
@@ -963,9 +961,9 @@ Consistency made adoption painless.
 
 ### Dashboard Priorities
 
-1. **Soil + weather alignment** — overlay moisture sensors with NOAA data.
-2. **Volunteer velocity** — weekly active volunteers vs. staffing target.
-3. **Harvest storytelling** — rolling sum of produce donated, wrapped in short copy blocks.
+1. **Soil + weather alignment** -- overlay moisture sensors with NOAA data.
+2. **Volunteer velocity** -- weekly active volunteers vs. staffing target.
+3. **Harvest storytelling** -- rolling sum of produce donated, wrapped in short copy blocks.
 
 ### Accessibility Wins
 
@@ -975,7 +973,7 @@ Consistency made adoption painless.
 
 ### Outcome
 
-Farms now send a single shareable link during board reviews—no more CSV exports at midnight.
+Farms now send a single shareable link during board reviews--no more CSV exports at midnight.
 `,
     },
   ],
@@ -983,13 +981,13 @@ Farms now send a single shareable link during board reviews—no more CSV export
     {
       label: "CV",
       file: "/downloads/CV.pdf",
-      updated: "2025-02-01",
-      sizeKB: 100,
+      updated: "2026-05-29",
+      sizeKB: 224,
     },
     {
       label: "Resume",
       file: "/downloads/Resume.pdf",
-      updated: "2025-02-01",
+      updated: "2026-05-29",
       sizeKB: 120,
     },
   ],

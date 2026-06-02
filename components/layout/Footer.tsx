@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Route } from "next";
 
 import { siteContent } from "@/content/siteContent";
-import { cn } from "@/lib/utils";
 
 const footerLinks = [
   { label: "Home", href: "#home" },
@@ -13,61 +12,68 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-white/5 bg-surface/80 backdrop-blur-xl" role="contentinfo">
-      <div className="container-grid flex flex-col gap-10 py-12">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+    <footer className="relative mt-24 border-t border-white/[0.06]" role="contentinfo">
+      {/* Gradient top accent */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+
+      <div className="container-grid py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+          {/* Left column */}
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-subtle">Let&apos;s build impactful systems</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-subtle">
+              Let&apos;s build something impactful
+            </p>
             <h2 className="mt-3 text-[clamp(1.75rem,3vw,2.4rem)] font-semibold text-foreground">
-              {siteContent.profile.name}
+              <span className="gradient-text">{siteContent.profile.name}</span>
             </h2>
-            <p className="mt-2 max-w-xl text-sm text-muted">
+            <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted">
               {siteContent.profile.bioShort}
             </p>
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              {siteContent.profile.socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.03] px-4 py-2 text-xs text-muted transition hover:border-accent/40 hover:text-foreground"
+                >
+                  {social.label}
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            {siteContent.profile.socials.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm text-muted transition hover:border-accent/50 hover:text-foreground"
-              >
-                {social.label}
-              </a>
-            ))}
-          </div>
-        </div>
 
-        <div className="flex flex-col-reverse gap-6 border-t border-white/5 pt-6 text-xs text-subtle md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} Krishna Kalakonda. All rights reserved.</p>
-          <nav aria-label="Footer" className="flex flex-wrap items-center gap-4 text-sm">
-            {footerLinks.map((link) => {
-              const href = link.href.startsWith("#")
-                ? { pathname: "/", hash: link.href.replace("#", "") }
-                : link.href;
-              return (
-                <Link key={link.label} href={href} className="transition hover:text-foreground">
-                  {link.label}
-                </Link>
-              );
-            })}
+          {/* Right column */}
+          <div className="flex flex-col justify-between gap-6">
+            <nav aria-label="Footer" className="flex flex-wrap gap-6 text-sm">
+              {footerLinks.map((link) => {
+                const href = link.href.startsWith("#")
+                  ? { pathname: "/", hash: link.href.replace("#", "") }
+                  : link.href;
+                return (
+                  <Link
+                    key={link.label}
+                    href={href}
+                    className="text-muted transition hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
             <Link
               href="#top"
-              className={cn(
-                "inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5 transition",
-                "hover:border-accent/50 hover:text-foreground"
-              )}
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-white/[0.06] px-4 py-2 text-xs text-subtle transition hover:border-accent/40 hover:text-foreground"
             >
               Back to top ↑
             </Link>
-          </nav>
+          </div>
         </div>
 
-        <p className="text-xs text-subtle">
-          Privacy-first analytics only. No invasive trackers. Performance optimized for 90+ Lighthouse scores across performance, SEO, and accessibility.
-        </p>
+        <div className="mt-12 border-t border-white/[0.06] pt-6 text-xs text-subtle">
+          <p>© {new Date().getFullYear()} Krishna Kalakonda. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );

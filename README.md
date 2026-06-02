@@ -62,7 +62,7 @@ After editing, restart the dev server to recompute derived metadata if necessary
 ### Vercel
 1. Push the repo to GitHub.
 2. Import to Vercel, set build command `npm run build`, output directory `.next`.
-3. Add environment variables if integrating analytics or email providers.
+3. Add environment variables if integrating email providers.
 
 ### Netlify
 1. Create a new site from Git.
@@ -77,7 +77,7 @@ After editing, restart the dev server to recompute derived metadata if necessary
 - Keyboard-friendly nav, modal, and filters; skip-to-content anchor shipped from `app/layout.tsx`.
 - Charts include `aria-label`s and tooltips; hero stats announce via `aria-live`.
 - Lazy loads heavy assets (charts, embeds) and preloads the hero portrait.
-- Target Lighthouse scores ≥90 (Perf/SEO/A11y). Example metrics in [`docs/lighthouse-report.md`](docs/lighthouse-report.md).
+- Target Lighthouse scores >=90 for Performance, SEO, and Accessibility.
 
 ## Project Structure
 
@@ -87,35 +87,22 @@ app/
 components/        # UI building blocks (layout, home sections, charts, etc.)
 content/siteContent.ts
 hooks/             # Scroll spy and other client utilities
-lib/               # Fonts, utils, analytics, validation, mdx helpers
+lib/               # Fonts, utils, validation, mdx helpers
 public/            # Optimized assets (favicons, portrait, OG image, downloads)
 tests/             # Vitest suites
 ```
 
 ## Updating Assets
 
-- Replace `public/me.png` with a high-resolution portrait (same filename for preload).
+- Replace `public/krishna1.png` with a high-resolution transparent portrait when refreshing the hero image.
 - Update `/public/downloads/CV.pdf` and `/public/downloads/Resume.pdf` when refreshing documents.
 - Refresh `public/og-cover.png` to match new visuals (used for Open Graph/Twitter cards).
-
-## Lighthouse Snapshot
-
-A recent local run (Chrome Lighthouse 11, throttled simulated 4G) delivered:
-
-| Category | Score |
-| -------- | ----- |
-| Performance | 92 |
-| Accessibility | 100 |
-| Best Practices | 100 |
-| SEO | 100 |
-
-Full notes are stored at [`docs/lighthouse-report.md`](docs/lighthouse-report.md).
 
 ## Future Enhancements
 
 - Integrate production email service with the contact action.
 - Add animated screen recordings or live embeds for flagship projects.
-- Expand analytics toggle (`lib/analytics.ts`) to connect privacy-friendly tracking.
+- Connect privacy-friendly analytics if the site needs production usage tracking.
 
 ---
 
