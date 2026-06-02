@@ -7,22 +7,30 @@ export function EducationSection() {
         <p className="text-xs uppercase tracking-[0.28em] text-info">Education</p>
         <h2 className="section-title mt-3">Academic foundation</h2>
         <p className="mt-4 text-muted">
-          An engineer&apos;s rigor blended with design thinking from interdisciplinary programs ensures every model is production-ready and values human context.
+          An engineer&apos;s rigor blended with data science depth ensures every model is
+          production-ready and values human context.
         </p>
       </header>
       <div className="grid gap-4 md:grid-cols-2">
         {siteContent.education.map((edu) => (
-          <article key={edu.degree} className="surface-card h-full rounded-3xl border border-white/5 p-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-foreground">{edu.degree}</h3>
-              <span className="rounded-full border border-info/40 bg-info/10 px-3 py-1 text-xs font-semibold text-info">
+          <article
+            key={edu.degree}
+            className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-surface/60 p-6 transition card-hover"
+          >
+            {/* Gradient top accent */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-info/40 to-transparent" />
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1">
+                <h3 className="text-base font-semibold text-foreground">{edu.degree}</h3>
+                <p className="mt-1 text-sm text-muted">{edu.school}</p>
+                {edu.location && <p className="text-xs text-subtle">{edu.location}</p>}
+              </div>
+              <span className="shrink-0 rounded-full border border-info/30 bg-info/10 px-3 py-1 text-[11px] font-semibold text-info">
                 {edu.start} — {edu.end}
               </span>
             </div>
-            <p className="mt-3 text-sm font-medium text-muted">{edu.school}</p>
-            {edu.location && <p className="text-xs text-subtle">{edu.location}</p>}
             {edu.gpa && (
-              <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-surface/70 px-3 py-1 text-xs text-subtle">
+              <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.03] px-3 py-1 text-xs font-medium text-subtle">
                 CGPA {edu.gpa}
               </p>
             )}

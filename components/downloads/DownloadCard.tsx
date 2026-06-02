@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Download, QrCode } from "lucide-react";
+import { Download, FileText, QrCode } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
 
 interface DownloadItem {
@@ -17,6 +17,8 @@ interface DownloadCardProps {
 
 export function DownloadCard({ item }: DownloadCardProps) {
   const [showQR, setShowQR] = useState(false);
+  const extension = item.file.split(".").pop()?.toUpperCase() ?? "FILE";
+  const isPdf = extension === "PDF";
 
   return (
     <article className="surface-card flex flex-col gap-4 rounded-3xl border border-white/5 p-6">
@@ -28,20 +30,30 @@ export function DownloadCard({ item }: DownloadCardProps) {
           )}
         </div>
         <span className="rounded-full border border-info/40 bg-info/10 px-3 py-1 text-xs font-semibold text-info">
-          {item.sizeKB ? `${item.sizeKB} KB` : "PDF"}
+          {item.sizeKB ? `${item.sizeKB} KB` : extension}
         </span>
       </header>
       <p className="text-sm text-muted">
         Download a polished {item.label.toLowerCase()} tailored for data science and full-stack roles.
       </p>
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-surface/60">
-        <iframe
-          src={`${item.file}#toolbar=0&navpanes=0`}
-          title={`${item.label} preview`}
-          className="h-[420px] w-full"
-          loading="lazy"
-        />
-      </div>
+      {isPdf ? (
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-surface/60">
+          <iframe
+            src={`${item.file}#toolbar=0&navpanes=0`}
+            title={`${item.label} preview`}
+            className="h-[420px] w-full"
+            loading="lazy"
+          />
+        </div>
+      ) : (
+        <div className="flex min-h-[220px] flex-col items-center justify-center gap-3 rounded-2xl border border-white/10 bg-surface/60 p-6 text-center">
+          <FileText className="h-10 w-10 text-info" aria-hidden />
+          <div>
+            <p className="text-sm font-semibold text-foreground">{extension} document</p>
+            <p className="mt-1 text-xs text-subtle">Use the download button below to open the editable file.</p>
+          </div>
+        </div>
+      )}
       <div className="flex flex-wrap items-center gap-3">
         <a
           href={item.file}
@@ -61,7 +73,7 @@ export function DownloadCard({ item }: DownloadCardProps) {
       {showQR && (
         <div className="flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-surface/70 p-4">
           <QRCodeCanvas value={`https://krishnakalakonda.com${item.file}`} size={128} bgColor="#10131A" fgColor="#E6E9EF" />
-          <p className="text-xs text-subtle">Scan to save on your phone</p>
+          <p className="text-xs text-subtle">Scan to save this file</p>
         </div>
       )}
     </article>
@@ -69,6 +81,7 @@ export function DownloadCard({ item }: DownloadCardProps) {
 }
 
 function formatDate(value: string) {
-  const date = new Date(value);
+  const [year, month, day] = value.split("-").map(Number);
+  const date = year && month && day ? new Date(year, month - 1, day) : new Date(value);
   return date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
 }

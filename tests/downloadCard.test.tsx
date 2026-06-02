@@ -7,8 +7,8 @@ import { DownloadCard } from "@/components/downloads/DownloadCard";
 const mockDownload = {
   label: "CV" as const,
   file: "/downloads/CV.pdf",
-  updated: "2025-02-01",
-  sizeKB: 100,
+  updated: "2026-05-29",
+  sizeKB: 224,
 };
 
 describe("DownloadCard", () => {

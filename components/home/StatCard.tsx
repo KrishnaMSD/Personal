@@ -36,14 +36,18 @@ export function StatCard({ label, value, prefix, suffix }: StatCardProps) {
       ref={ref}
       role="status"
       aria-live="polite"
-      className="surface-card flex flex-col gap-2 rounded-3xl p-6"
+      className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-surface/60 p-5 transition card-hover"
     >
-      <span className="text-xs uppercase tracking-[0.28em] text-subtle">{label}</span>
-      <span className="text-3xl font-semibold text-foreground">
-        {prefix}
-        {display}
-        {suffix}
-      </span>
+      {/* Gradient top accent line */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+      <span className="text-[11px] uppercase tracking-[0.2em] text-subtle">{label}</span>
+      <div className="mt-2 flex items-baseline gap-0.5">
+        <span className="text-3xl font-bold tracking-tight text-foreground">
+          {prefix}
+          {display}
+          {suffix}
+        </span>
+      </div>
     </div>
   );
 }
